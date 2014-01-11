@@ -55,7 +55,29 @@ public class Model {
 	
 	public void spawnEnemy()
 	{
-		Enemy enemy = new Enemy((float)(Math.random()*screenWidth),(float)(Math.random()*screenHeight));
+		float newX = 0, newY = 0;
+		// Try and spawn away from the players
+		for(int i = 0; i < 20; i++)
+		{
+			boolean positionIsOk = true;
+			newX = (float)(Math.random()*screenWidth);
+			newY = (float)(Math.random()*screenHeight);
+			
+			for(Soldier soldier : soldiers)
+			{
+				if(Functions.rectsOverlap(newX, newY, 1, 1,
+						soldier.getX()-5*soldier.getWidth(), soldier.getY()-5*soldier.getWidth(), 5*soldier.getWidth(), 5*soldier.getWidth()))
+				{
+					positionIsOk = false;
+				}
+				
+			}
+			if(positionIsOk)
+			{
+				break;
+			}
+		}
+		Enemy enemy = new Enemy(newX,newY);
     	enemies.add(enemy);
     	renderables.add(enemy);
 	}
