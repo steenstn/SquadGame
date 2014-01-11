@@ -33,9 +33,9 @@ public class Model {
 	    
 	    soldiers = new ArrayList<Soldier>();
 	    soldiers.add(new Soldier("Bengelohanna", 100,100,255,0,0));
-	    soldiers.add(new Soldier("Pepper Jack", 200,100,0,0,255));
-	    soldiers.add(new Soldier("Jörgen Etwas", 300,100,0,255,0));
-	    soldiers.add(new Soldier("Mustaffan", 400,100,255,255,0));
+	    soldiers.add(new Soldier("Pepper Jack", 100,screenHeight/2,0,0,255));
+	    soldiers.add(new Soldier("Jörgen Etwas", screenWidth-200,100,0,255,0));
+	    soldiers.add(new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0));
 	    
 	    portraits = new ArrayList<SoldierPortrait>();
 	    portraits.add(new SoldierPortrait(soldiers.get(0),50,screenHeight-200));

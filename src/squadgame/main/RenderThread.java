@@ -36,7 +36,7 @@ class RenderThread extends Thread {
 	        		Enemy enemy = model.enemies.get(i);
 	        		if(enemy.isAlive())
 	        		{
-	        			enemy.updatePosition();
+	        			enemy.updatePosition(model);
 	        		}
 	        		else
 	        		{

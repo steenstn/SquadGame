@@ -21,7 +21,7 @@ public class Soldier implements IRenderable{
 	private int reloadCounter;
 	private Enemy targetEnemy;
 	private SoldierPortrait portrait;
-	
+	private float bulletAngle;
 	private int health;
 	private boolean alive;
 	
@@ -124,12 +124,13 @@ public class Soldier implements IRenderable{
 	public void shoot(Model model)
 	{
 		reloadCounter--;
+		float deltaX = targetEnemy.getX() - x;
+		float deltaY = targetEnemy.getY() - y;
+		bulletAngle = (float) (Math.atan2(deltaY, deltaX));
 		if(reloadCounter <= 0)
 		{
 			reloadCounter = 100;
-			float deltaX = targetEnemy.getX() - x;
-			float deltaY = targetEnemy.getY() - y;
-			float bulletAngle = (float) (Math.atan2(deltaY, deltaX));
+			
 				
 			float bulletX = (float) (x + 1.5*width*Math.cos(bulletAngle));
 			float bulletY = (float) (y + 1.5*width*Math.sin(bulletAngle));
@@ -151,6 +152,8 @@ public class Soldier implements IRenderable{
 	  	textPaint.setAntiAlias(true);
 	  	textPaint.setTextSize(20);
 	  	c.drawCircle(x+width/2, y+width/2, width, paint);
+	  	c.drawLine(x+width/2, y+width/2,
+	  			(float)(x+width/2+2*width*Math.cos(bulletAngle)),  (float)(y+width/2+2*width*Math.sin(bulletAngle)), textPaint);
 	  	c.drawText(name, x, y-20, textPaint);
 	  	c.drawText("HP: " + health, x, y, textPaint);
 	  	c.drawCircle(targetX, targetY,5,paint);
