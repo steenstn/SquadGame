@@ -59,6 +59,7 @@ class RenderThread extends Thread {
 			        		soldier.shoot(model);
 		        		}
 		    	    	soldier.updatePosition();
+		    	    	soldier.checkCollisions(model);
 	        		}
 	        		else
 	        		{

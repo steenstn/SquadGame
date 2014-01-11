@@ -87,6 +87,14 @@ public class Soldier implements IRenderable{
 		targetEnemy = enemies.get(indexOfClosestEnemy);
 	}
 	
+	public void checkCollisions(Model model)
+	{
+		for(Enemy enemy : model.enemies)
+		{
+			if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
+				takeDamage(1);
+		}
+	}
 	public void takeDamage(int damage)
 	{
 		health -= damage;
