@@ -121,7 +121,7 @@ class RenderThread extends Thread {
       			
       			if(enemy.getHealth()<=0)
       			{
-      				model.kills++;
+      				model.score += 100;
       			}
       			model.spawnEnemy();
       			if(Math.random()>0.6)
@@ -159,7 +159,7 @@ class RenderThread extends Thread {
 	    textPaint.setAntiAlias(true);
 	    textPaint.setTextSize(30);
 	    textPaint.setColor(Color.WHITE);
-	    canvas.drawText("Kills: " + model.kills, 10, 50, textPaint);
+	    canvas.drawText("Score: " + model.score, 10, 50, textPaint);
 	    if(model.soldiers.size() == 0)
 	    {
 	    	Paint gameOverPaint = new Paint();

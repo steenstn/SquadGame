@@ -27,7 +27,7 @@ public class Model {
 	private PickupFactory pickupFactory = new PickupFactory();
 	public int screenWidth;
 	public int screenHeight;
-	int kills = 0;
+	public int score = 0;
 	public Model(Context ctx)
 	{
 		WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);

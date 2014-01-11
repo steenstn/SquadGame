@@ -18,6 +18,7 @@ public class HealthPickup extends AbstractPickup {
 		this.width = 15;
 		this.active = true;
 		this.pickedUp = false;
+		this.scoreForPickup = 10;
 	}
 	
 	

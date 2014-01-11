@@ -8,13 +8,14 @@ import squadgame.main.Model;
 public abstract class AbstractPickup implements IRenderable{
 
 	// Time until the pickup disappears after it has been dropped
-	public int pickupTime;
+	protected int pickupTime;
 	// The time the effect is active
-	public int effectTime;
+	protected int effectTime;
 	protected float x,y;
 	protected int width;
-	public boolean active;
+	protected boolean active;
 	protected boolean pickedUp; // If this pickup has been picked up
+	protected int scoreForPickup = 0;
 	
 	public void countDownTimer()
 	{
@@ -35,6 +36,7 @@ public abstract class AbstractPickup implements IRenderable{
 				{
 					pickedUp = true;
 					soldier.addPickup(this);
+					model.score += scoreForPickup;
 				}
 		}
 	}

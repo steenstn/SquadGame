@@ -17,6 +17,7 @@ public class RapidFirePickup extends AbstractPickup {
 		this.width = 15;
 		this.active = true;
 		this.pickedUp = false;
+		this.scoreForPickup = 20;
 	}
 	
 	
@@ -30,20 +31,18 @@ public class RapidFirePickup extends AbstractPickup {
 	}
 	@Override
 	public void activatePickup(Soldier soldier) {
-		System.out.println("Activating rapid fire for " + soldier.getName());
 		soldier.setReloadCounter(10);
-		
 	}
 
 	@Override
 	public void doEffect(Soldier soldier) {
 		this.effectTime--;
+		soldier.setReloadCounter(10);
 		if(effectTime < 1)
 			deactivatePickup(soldier);
 	}
 	@Override
 	public void deactivatePickup(Soldier soldier) {
-		System.out.println("Deactivating rapid fire for " + soldier.getName());
 		soldier.setReloadCounter(Soldier.originalReloadSpeed);
 		active = false;
 	}

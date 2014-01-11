@@ -51,12 +51,12 @@ public class SoldierPortrait implements IRenderable{
 	  	
 	  	c.drawRect(x, y, x+width, y+height, paint);
 	  	c.drawText(soldier.getName(), x, y+height, textPaint);
-	  	
+	  	/*
 	  	for(int i = 0; i < soldier.pickups.size();i++)
 	  	{
 	  		AbstractPickup p = soldier.pickups.get(i);
 	  		c.drawText("Etime: " + p.effectTime + " - Ptime" + p.pickupTime,x, y+i*20, textPaint);
-	  	}
+	  	}*/
 	  	if(selected)
 	  	{
 		  	Paint selectionPaint = new Paint();
