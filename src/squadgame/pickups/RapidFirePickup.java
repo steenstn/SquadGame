@@ -7,13 +7,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class HealthPickup extends AbstractPickup {
+public class RapidFirePickup extends AbstractPickup {
 
-	public HealthPickup(float x, float y)
+	
+	public RapidFirePickup(float x, float y)
 	{
 		this.x = x;
 		this.y = y;
-		this.effectTime = 1;
+		this.effectTime = 200;
 		this.pickupTime = 500;
 		this.width = 15;
 		this.active = true;
@@ -23,21 +24,17 @@ public class HealthPickup extends AbstractPickup {
 	
 	@Override
 	public void render(Canvas c) {
+		if(pickedUp)
+			return;
 		Paint paint = new Paint();
-		paint.setColor(Color.CYAN);
+		paint.setColor(Color.YELLOW);
 		c.drawCircle(x, y, width, paint);
 	}
 	@Override
 	public void activatePickup(Soldier soldier) {
-		
-		soldier.setHealth(soldier.getHealth() + 15);
+		soldier.setReloadCounter(10);
 		
 	}
-	@Override
-	public void deactivatePickup(Soldier soldier) {
-		active = false;
-	}
-
 
 	@Override
 	public void doEffect(Soldier soldier) {
@@ -48,8 +45,16 @@ public class HealthPickup extends AbstractPickup {
 		else
 		{
 			deactivatePickup(soldier);
-		}
+		}	
+		
 	}
+	@Override
+	public void deactivatePickup(Soldier soldier) {
+		soldier.setReloadCounter(Soldier.originalReloadSpeed);
+		active = false;
+	}
+
+
 
 
 

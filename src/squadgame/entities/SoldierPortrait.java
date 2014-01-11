@@ -47,6 +47,7 @@ public class SoldierPortrait implements IRenderable{
 	  	textPaint.setARGB(255, 255, 255, 255);
 	  	textPaint.setAntiAlias(true);
 	  	textPaint.setTextSize(20);
+	  	c.drawText("reload: " + soldier.getReloadCounter(), x, y+20, textPaint);
 	  	
 	  	c.drawRect(x, y, x+width, y+height, paint);
 	  	c.drawText(soldier.getName(), x, y+height, textPaint);

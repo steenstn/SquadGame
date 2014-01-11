@@ -2,6 +2,7 @@ package squadgame.factories;
 
 import squadgame.pickups.AbstractPickup;
 import squadgame.pickups.HealthPickup;
+import squadgame.pickups.RapidFirePickup;
 
 public class PickupFactory {
 
@@ -20,6 +21,9 @@ public class PickupFactory {
 		 * 
 		 *  
 		 */
-		return new HealthPickup(x,y);
+		if(result>0.2)
+			return new RapidFirePickup(x,y);
+		else
+			return new HealthPickup(x,y);
 	}
 }

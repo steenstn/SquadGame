@@ -12,6 +12,7 @@ import android.graphics.Paint;
 
 public class Soldier implements IRenderable, IEntity{
 
+	public static final int originalReloadSpeed = 80;
 	private float x, y;
 	private float angle;
 	private float speed;
@@ -19,6 +20,7 @@ public class Soldier implements IRenderable, IEntity{
 	private String name;
 	private int width = 30;
 	private float targetX, targetY;
+	private int currentReloadCounter;
 	private int reloadCounter;
 	private Enemy targetEnemy;
 	private SoldierPortrait portrait;
@@ -44,13 +46,16 @@ public class Soldier implements IRenderable, IEntity{
 		this.alive = true;
 		
 		this.speed = 3;
-		this.reloadCounter = 80;
+		this.reloadCounter = this.currentReloadCounter = 80;
 		
 		pickups = new ArrayList<AbstractPickup>();
 	}
 	
 	public String getName() { return name; }
 	public SoldierPortrait getPortrait() { return portrait; }
+	public int getReloadCounter() { return reloadCounter; }
+	public int getCurrentReloadCounter() { return currentReloadCounter; }
+	
 	public float getX() { return x; }
 	public float getY() { return y; }
 	public int getWidth() { return width; }
@@ -63,6 +68,14 @@ public class Soldier implements IRenderable, IEntity{
 		targetX = x;
 		targetY = y;
 	}
+	
+	public void setReloadCounter(int value)
+	{
+		reloadCounter = value;
+		if(reloadCounter < 10)
+			reloadCounter = 10;
+	}
+	
 	public void setPortrait(SoldierPortrait portrait)
 	{
 		this.portrait = portrait;
@@ -94,6 +107,7 @@ public class Soldier implements IRenderable, IEntity{
 	public void addPickup(AbstractPickup pickup)
 	{
 		pickups.add(pickup);
+		pickup.activatePickup(this);
 	}
 	
 	@Override
@@ -104,16 +118,6 @@ public class Soldier implements IRenderable, IEntity{
 			if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
 				takeDamage(1);
 		}
-		/*
-		for(AbstractPickup pickup : model.pickups)
-		{
-			if(Functions.rectsOverlap(x, y, width, width,
-					pickup.getX(), pickup.getY(), pickup.getWidth(), pickup.getWidth()))
-			{
-				pickups.add(pickup);
-			}
-				
-		}*/
 	}
 	
 	public void usePickups()
@@ -125,7 +129,7 @@ public class Soldier implements IRenderable, IEntity{
 		{
 			if(pickups.get(i).isActive())
 			{
-				pickups.get(i).activatePickup(this);
+				pickups.get(i).doEffect(this);
 			}
 			else
 			{
@@ -177,13 +181,13 @@ public class Soldier implements IRenderable, IEntity{
 	
 	public void shoot(Model model)
 	{
-		reloadCounter--;
+		currentReloadCounter--;
 		float deltaX = targetEnemy.getX() - x;
 		float deltaY = targetEnemy.getY() - y;
 		bulletAngle = (float) (Math.atan2(deltaY, deltaX));
-		if(reloadCounter <= 0)
+		if(currentReloadCounter <= 0)
 		{
-			reloadCounter = 80;
+			currentReloadCounter = reloadCounter;
 			
 				
 			float bulletX = (float) (x + 1.5*width*Math.cos(bulletAngle));

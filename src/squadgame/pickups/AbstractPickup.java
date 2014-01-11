@@ -2,6 +2,7 @@ package squadgame.pickups;
 
 import squadgame.entities.Soldier;
 import squadgame.interfaces.IRenderable;
+import squadgame.main.Functions;
 import squadgame.main.Model;
 
 public abstract class AbstractPickup implements IRenderable{
@@ -23,12 +24,23 @@ public abstract class AbstractPickup implements IRenderable{
 			this.active = false;
 		}
 	}
-	public abstract void checkCollisions(Model model);
+	public void checkCollisions(Model model) {
+		for(Soldier soldier : model.soldiers)
+		{
+			if(!pickedUp && Functions.rectsOverlap(x, y, width, width,
+					soldier.getX(), soldier.getY(), soldier.getWidth(), soldier.getWidth()))
+				{
+					pickedUp = true;
+					soldier.addPickup(this);
+				}
+		}
+	}
 	public float getX() { return x; }
 	public float getY() { return y; }
 	public int getWidth() { return width; }
 	public boolean isActive() { return active; }
 	public abstract void activatePickup(Soldier soldier);
+	public abstract void doEffect(Soldier soldier);
 	public abstract void deactivatePickup(Soldier soldier);
 	
 }
