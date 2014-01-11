@@ -134,6 +134,14 @@ class RenderThread extends Thread {
 	    textPaint.setTextSize(30);
 	    textPaint.setColor(Color.WHITE);
 	    canvas.drawText("Kills: " + model.kills, 10, 50, textPaint);
+	    if(model.soldiers.size() == 0)
+	    {
+	    	Paint gameOverPaint = new Paint();
+	    	gameOverPaint.setAntiAlias(true);
+	    	gameOverPaint.setTextSize(200);
+	    	gameOverPaint.setColor(Color.WHITE);
+	    	canvas.drawText("GAME OVER", 10, model.screenHeight/2, gameOverPaint);
+	    }
 	  }
 	  
 	}
