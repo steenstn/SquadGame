@@ -141,6 +141,10 @@ public class Soldier implements IRenderable, IEntity{
 	public void setHealth(int health)
 	{
 		this.health = health;
+		if(this.health>100)
+		{
+			this.health = 100;
+		}
 	}
 	
 	public void takeDamage(int damage)
