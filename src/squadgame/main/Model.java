@@ -6,6 +6,7 @@ import squadgame.entities.Bullet;
 import squadgame.entities.Enemy;
 import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
+import squadgame.factories.PickupFactory;
 import squadgame.interfaces.IRenderable;
 import squadgame.pickups.AbstractPickup;
 
@@ -22,6 +23,8 @@ public class Model {
 	public ArrayList<IRenderable> renderables;
 	public ArrayList<Bullet> bullets;
 	public ArrayList<AbstractPickup> pickups;
+	
+	private PickupFactory pickupFactory = new PickupFactory();
 	public int screenWidth;
 	public int screenHeight;
 	int kills = 0;
@@ -85,6 +88,12 @@ public class Model {
     	renderables.add(enemy);
 	}
 	
+	public void createRandomPickup(float x, float y)
+	{
+		AbstractPickup pickup = pickupFactory.createRandomPickup(x, y);
+		pickups.add(pickup);
+		renderables.add(pickup);
+	}
 	private void addRenderables()
 	{
 

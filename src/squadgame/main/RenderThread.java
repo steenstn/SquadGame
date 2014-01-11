@@ -112,9 +112,11 @@ class RenderThread extends Thread {
       		}
       		else
       		{
+      			double chance = Math.random();
+      			if(chance>0.5)
+      				model.createRandomPickup(enemy.getX(), enemy.getY());
       			HealthPickup pickup = new HealthPickup(enemy.getX(),enemy.getY());
-      			model.pickups.add(pickup);
-      			model.renderables.add(pickup);
+      			
       			model.enemies.remove(i);
       			model.renderables.remove(enemy);
       			
