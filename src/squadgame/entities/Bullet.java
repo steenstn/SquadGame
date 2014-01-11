@@ -47,6 +47,11 @@ public class Bullet implements IRenderable{
 				soldier.takeDamage(damage);
 			}
 		}
+		
+		if(x > model.screenWidth || x < 0 || y > model.screenHeight || y < 0)
+		{
+			this.alive = false;
+		}
 	}
 	
 	public boolean isAlive() { return alive; }

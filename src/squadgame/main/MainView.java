@@ -151,9 +151,14 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 				}
 				for(Soldier soldier : model.soldiers)
 				{
+					// If a soldier is clicked on, select only that soldier
 					if(Functions.rectsOverlap(event.getX(), event.getY(), 1, 1, 
-							soldier.getX()-soldier.getWidth()/2, soldier.getY()-soldier.getWidth()/2, 2*soldier.getWidth(), 2*soldier.getWidth()))
+							soldier.getX()-soldier.getWidth(), soldier.getY()-soldier.getWidth(), 3*soldier.getWidth(), 3*soldier.getWidth()))
 						{
+							for(SoldierPortrait portrait : model.portraits)
+							{	
+								portrait.setSelected(false);
+							}
 							soldier.getPortrait().toggleSelected();
 							return true;
 						}
