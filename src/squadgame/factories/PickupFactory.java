@@ -21,7 +21,7 @@ public class PickupFactory {
 		 * 
 		 *  
 		 */
-		if(result>0.2)
+		if(result>0.5)
 			return new RapidFirePickup(x,y);
 		else
 			return new HealthPickup(x,y);

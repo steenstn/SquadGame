@@ -113,7 +113,7 @@ class RenderThread extends Thread {
       		else
       		{
       			double chance = Math.random();
-      			if(chance>0.0)
+      			if(chance>0.7)
       				model.createRandomPickup(enemy.getX(), enemy.getY());
       			
       			model.enemies.remove(i);
