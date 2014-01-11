@@ -1,11 +1,12 @@
 package squadgame.entities;
 
+import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Model;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class Enemy implements IRenderable{
+public class Enemy implements IRenderable, IEntity{
 
 	private float x,y;
 	private float angle;
@@ -24,6 +25,7 @@ public class Enemy implements IRenderable{
 		this.alive = true;
 	}
 	
+	@Override
 	public void updatePosition(Model model)
 	{
 		if(Math.abs(angle-targetAngle) < 0.1)
@@ -55,11 +57,19 @@ public class Enemy implements IRenderable{
 	public float getX() { return x; }
 	public float getY() { return y; }
 	public int getWidth() { return width; }
-	public boolean isAlive()
+	public int getHealth() { return health; }
+	
+	@Override
+	public boolean isActive()
 	{
 		return alive;
 	}
-	
+
+	@Override
+	public void checkCollisions(Model model) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public void render(Canvas c) {
@@ -69,5 +79,6 @@ public class Enemy implements IRenderable{
 		c.drawText("HP: " + health, x+25, y, paint);
 		
 	}
+
 
 }

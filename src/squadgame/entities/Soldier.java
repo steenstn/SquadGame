@@ -2,16 +2,16 @@ package squadgame.entities;
 
 import java.util.ArrayList;
 
+import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
 import squadgame.main.Model;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class Soldier implements IRenderable{
+public class Soldier implements IRenderable, IEntity{
 
 	private float x, y;
-
 	private float angle;
 	private float speed;
 	private int red,green,blue;
@@ -42,7 +42,7 @@ public class Soldier implements IRenderable{
 		this.alive = true;
 		
 		this.speed = 3;
-		this.reloadCounter = 10;
+		this.reloadCounter = 80;
 	}
 	
 	public String getName() { return name; }
@@ -87,6 +87,7 @@ public class Soldier implements IRenderable{
 		targetEnemy = enemies.get(indexOfClosestEnemy);
 	}
 	
+	@Override
 	public void checkCollisions(Model model)
 	{
 		for(Enemy enemy : model.enemies)
@@ -102,11 +103,13 @@ public class Soldier implements IRenderable{
 			alive = false;
 	}
 	
-	public boolean isAlive()
+	public boolean isActive()
 	{
 		return alive;
 	}
-	public void updatePosition()
+	
+	@Override
+	public void updatePosition(Model model)
 	{
 		
 		float deltaX = targetX - x;
@@ -129,7 +132,7 @@ public class Soldier implements IRenderable{
 		bulletAngle = (float) (Math.atan2(deltaY, deltaX));
 		if(reloadCounter <= 0)
 		{
-			reloadCounter = 100;
+			reloadCounter = 80;
 			
 				
 			float bulletX = (float) (x + 1.5*width*Math.cos(bulletAngle));

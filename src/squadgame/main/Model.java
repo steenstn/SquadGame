@@ -22,6 +22,7 @@ public class Model {
 	public ArrayList<Bullet> bullets;
 	public int screenWidth;
 	public int screenHeight;
+	int kills = 0;
 	public Model(Context ctx)
 	{
 		WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
@@ -30,6 +31,7 @@ public class Model {
 	    display.getSize(size);
 	    screenWidth = size.x;
 	    screenHeight = size.y;
+	    
 	    
 	    soldiers = new ArrayList<Soldier>();
 	    soldiers.add(new Soldier("Bengelohanna", 100,100,255,0,0));
