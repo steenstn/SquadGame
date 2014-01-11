@@ -27,7 +27,7 @@ public class Soldier implements IRenderable, IEntity{
 	private float bulletAngle;
 	private int health;
 	private boolean alive;
-	private ArrayList<AbstractPickup> pickups;
+	public ArrayList<AbstractPickup> pickups;
 	
 	
 	public Soldier(String name, float x, float y,int r, int g,int b)

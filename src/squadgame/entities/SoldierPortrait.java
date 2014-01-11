@@ -1,6 +1,7 @@
 package squadgame.entities;
 
 import squadgame.interfaces.IRenderable;
+import squadgame.pickups.AbstractPickup;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
@@ -47,11 +48,15 @@ public class SoldierPortrait implements IRenderable{
 	  	textPaint.setARGB(255, 255, 255, 255);
 	  	textPaint.setAntiAlias(true);
 	  	textPaint.setTextSize(20);
-	  	c.drawText("reload: " + soldier.getReloadCounter(), x, y+20, textPaint);
 	  	
 	  	c.drawRect(x, y, x+width, y+height, paint);
 	  	c.drawText(soldier.getName(), x, y+height, textPaint);
 	  	
+	  	for(int i = 0; i < soldier.pickups.size();i++)
+	  	{
+	  		AbstractPickup p = soldier.pickups.get(i);
+	  		c.drawText("Etime: " + p.effectTime + " - Ptime" + p.pickupTime,x, y+i*20, textPaint);
+	  	}
 	  	if(selected)
 	  	{
 		  	Paint selectionPaint = new Paint();

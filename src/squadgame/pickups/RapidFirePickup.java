@@ -1,8 +1,6 @@
 package squadgame.pickups;
 
 import squadgame.entities.Soldier;
-import squadgame.main.Functions;
-import squadgame.main.Model;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,24 +30,20 @@ public class RapidFirePickup extends AbstractPickup {
 	}
 	@Override
 	public void activatePickup(Soldier soldier) {
+		System.out.println("Activating rapid fire for " + soldier.getName());
 		soldier.setReloadCounter(10);
 		
 	}
 
 	@Override
 	public void doEffect(Soldier soldier) {
-		if(effectTime > 0 && pickedUp)
-		{
-			this.effectTime--;
-		}
-		else
-		{
+		this.effectTime--;
+		if(effectTime < 1)
 			deactivatePickup(soldier);
-		}	
-		
 	}
 	@Override
 	public void deactivatePickup(Soldier soldier) {
+		System.out.println("Deactivating rapid fire for " + soldier.getName());
 		soldier.setReloadCounter(Soldier.originalReloadSpeed);
 		active = false;
 	}

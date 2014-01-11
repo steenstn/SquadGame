@@ -75,6 +75,7 @@ public class Enemy implements IRenderable, IEntity{
 	public void render(Canvas c) {
 		Paint paint = new Paint();
 		paint.setARGB(255, 150, 150, 150);
+		paint.setAntiAlias(true);
 		c.drawCircle(x+width/2, y+width/2, width, paint);
 		
 	}
