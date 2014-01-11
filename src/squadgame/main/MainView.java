@@ -163,13 +163,16 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 							return true;
 						}
 				}
+				ArrayList<Soldier> selectedSoldiers = new ArrayList<Soldier>();
+				
 				for(SoldierPortrait portrait : model.portraits)
 				{
 					if(portrait.isSelected())
 					{
-						portrait.getSoldier().setTarget(event.getX(), event.getY());
+						selectedSoldiers.add(portrait.getSoldier());
 					}
 				}
+				orderSelectedSoldiers(selectedSoldiers, event.getX(), event.getY());
 				mActivePointerId = INVALID_POINTER_ID;
 			break;
 			
@@ -200,6 +203,34 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 		return true;
 	}
   	
+	public void orderSelectedSoldiers(ArrayList<Soldier> soldiers, float x, float y)
+	{
+		if(soldiers.size()<=0)
+			return;
+		float offset = soldiers.get(0).getWidth()*3;
+		switch(soldiers.size())
+		{
+		case 1:
+			soldiers.get(0).setTarget(x, y);
+			break;
+		case 2:
+			soldiers.get(0).setTarget(x-offset, y);
+			soldiers.get(1).setTarget(x+offset, y);
+			break;
+		case 3:
+			soldiers.get(0).setTarget(x-offset, y);
+			soldiers.get(1).setTarget(x, y-offset);
+			soldiers.get(2).setTarget(x+offset, y);
+			break;
+		case 4:
+			soldiers.get(0).setTarget(x-offset, y);
+			soldiers.get(1).setTarget(x, y-offset);
+			soldiers.get(2).setTarget(x+offset, y);
+			soldiers.get(3).setTarget(x, y+offset);
+			break;	
+		}
+	}
+	
 	@Override
 	public boolean onScale(ScaleGestureDetector detector) {
 

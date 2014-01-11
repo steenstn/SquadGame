@@ -76,7 +76,6 @@ public class Enemy implements IRenderable, IEntity{
 		Paint paint = new Paint();
 		paint.setARGB(255, 150, 150, 150);
 		c.drawCircle(x+width/2, y+width/2, width, paint);
-		c.drawText("HP: " + health, x+25, y, paint);
 		
 	}
 
