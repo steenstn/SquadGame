@@ -4,6 +4,8 @@ import squadgame.entities.Bullet;
 import squadgame.entities.Enemy;
 import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
+import squadgame.pickups.AbstractPickup;
+import squadgame.pickups.HealthPickup;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -33,6 +35,7 @@ class RenderThread extends Thread {
 	        c = sh.lockCanvas(null);
 	        synchronized (sh) {
 	        	updateSoldiers();
+	        	updatePickups();
 	        	updateEnemies();
 	        	updateBullets();
 	        	doDraw(c);
@@ -66,6 +69,7 @@ class RenderThread extends Thread {
 		        		soldier.targetClosestEnemy(model.enemies);
 		        		soldier.shoot(model);
 	        		}
+	        		soldier.usePickups();
 	    	    	soldier.updatePosition(model);
 	    	    	soldier.checkCollisions(model);
       		}
@@ -79,6 +83,24 @@ class RenderThread extends Thread {
   	    }
 	  }
 	  
+	  private void updatePickups()
+	  {
+		  for(int i = 0; i < model.pickups.size(); i++)
+		  {
+			  AbstractPickup pickup = model.pickups.get(i);
+			  pickup.countDownTimer();
+			  if(pickup.isActive())
+			  {
+				  pickup.checkCollisions(model);
+			  }
+			  else
+			  {
+				  model.pickups.remove(i);
+				  model.renderables.remove(pickup);
+			  }
+			  
+		  }
+	  }
 	  private void updateEnemies()
 	  {
 		  for(int i = 0; i < model.enemies.size(); i++)
@@ -90,6 +112,9 @@ class RenderThread extends Thread {
       		}
       		else
       		{
+      			HealthPickup pickup = new HealthPickup(enemy.getX(),enemy.getY());
+      			model.pickups.add(pickup);
+      			model.renderables.add(pickup);
       			model.enemies.remove(i);
       			model.renderables.remove(enemy);
       			

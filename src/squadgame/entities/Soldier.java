@@ -6,6 +6,7 @@ import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
 import squadgame.main.Model;
+import squadgame.pickups.AbstractPickup;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
@@ -24,6 +25,7 @@ public class Soldier implements IRenderable, IEntity{
 	private float bulletAngle;
 	private int health;
 	private boolean alive;
+	private ArrayList<AbstractPickup> pickups;
 	
 	
 	public Soldier(String name, float x, float y,int r, int g,int b)
@@ -43,6 +45,8 @@ public class Soldier implements IRenderable, IEntity{
 		
 		this.speed = 3;
 		this.reloadCounter = 80;
+		
+		pickups = new ArrayList<AbstractPickup>();
 	}
 	
 	public String getName() { return name; }
@@ -87,6 +91,11 @@ public class Soldier implements IRenderable, IEntity{
 		targetEnemy = enemies.get(indexOfClosestEnemy);
 	}
 	
+	public void addPickup(AbstractPickup pickup)
+	{
+		pickups.add(pickup);
+	}
+	
 	@Override
 	public void checkCollisions(Model model)
 	{
@@ -95,7 +104,45 @@ public class Soldier implements IRenderable, IEntity{
 			if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
 				takeDamage(1);
 		}
+		/*
+		for(AbstractPickup pickup : model.pickups)
+		{
+			if(Functions.rectsOverlap(x, y, width, width,
+					pickup.getX(), pickup.getY(), pickup.getWidth(), pickup.getWidth()))
+			{
+				pickups.add(pickup);
+			}
+				
+		}*/
 	}
+	
+	public void usePickups()
+	{
+		if(pickups.size() <= 0)
+			return;
+		
+		for(int i = 0; i < pickups.size(); i++)
+		{
+			if(pickups.get(i).isActive())
+			{
+				pickups.get(i).activatePickup(this);
+			}
+			else
+			{
+				pickups.remove(i);
+			}	
+		}
+	}
+	
+	public int getHealth()
+	{
+		return health;
+	}
+	public void setHealth(int health)
+	{
+		this.health = health;
+	}
+	
 	public void takeDamage(int damage)
 	{
 		health -= damage;
@@ -159,6 +206,8 @@ public class Soldier implements IRenderable, IEntity{
 	  			(float)(x+width/2+2*width*Math.cos(bulletAngle)),  (float)(y+width/2+2*width*Math.sin(bulletAngle)), textPaint);
 	  	c.drawText(name, x, y-20, textPaint);
 	  	c.drawText("HP: " + health, x, y, textPaint);
+	  	c.drawText("Pickups: " + pickups.size(), x, y+20, textPaint);
+	  	
 	  	c.drawCircle(targetX, targetY,5,paint);
   	
 	}

@@ -7,6 +7,7 @@ import squadgame.entities.Enemy;
 import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
 import squadgame.interfaces.IRenderable;
+import squadgame.pickups.AbstractPickup;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -20,6 +21,7 @@ public class Model {
 	public ArrayList<Enemy> enemies;
 	public ArrayList<IRenderable> renderables;
 	public ArrayList<Bullet> bullets;
+	public ArrayList<AbstractPickup> pickups;
 	public int screenWidth;
 	public int screenHeight;
 	int kills = 0;
@@ -50,6 +52,7 @@ public class Model {
 	    enemies.add(new Enemy(500,500));
 	    
 	    bullets = new ArrayList<Bullet>();
+	    pickups = new ArrayList<AbstractPickup>();
 	    addRenderables();
 	}
 	
