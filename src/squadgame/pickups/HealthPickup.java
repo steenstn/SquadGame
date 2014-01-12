@@ -11,21 +11,16 @@ public class HealthPickup extends AbstractPickup {
 
 	public HealthPickup(float x, float y)
 	{
-		this.x = x;
-		this.y = y;
+		super(x,y);
 		this.effectTime = 1;
 		this.pickupTime = 500;
-		this.width = 15;
-		this.active = true;
-		this.pickedUp = false;
 		this.scoreForPickup = 10;
+		this.paint.setColor(Color.CYAN);
 	}
 	
 	
 	@Override
 	public void render(Canvas c) {
-		Paint paint = new Paint();
-		paint.setColor(Color.CYAN);
 		c.drawCircle(x, y, width, paint);
 	}
 	@Override

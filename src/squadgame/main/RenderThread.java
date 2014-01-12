@@ -16,6 +16,7 @@ import android.view.SurfaceHolder;
 class RenderThread extends Thread {
 	  private boolean run = false;
 
+	  public boolean userPaused = false;
 	  private SurfaceHolder sh;
 	  private Model model;
 	  
@@ -113,7 +114,7 @@ class RenderThread extends Thread {
       		else
       		{
       			double chance = Math.random();
-      			if(chance>0.7)
+      			if(chance>model.dropChance)
       				model.createRandomPickup(enemy.getX(), enemy.getY());
       			
       			model.enemies.remove(i);
@@ -146,6 +147,14 @@ class RenderThread extends Thread {
       			model.renderables.remove(bullet);
       		}
       	}
+	  }
+	  
+	  public void waitOnResume()
+	  {
+		  while(userPaused)
+		  {
+			  
+		  }
 	  }
 	  
 	  private void doDraw(Canvas canvas) {

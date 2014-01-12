@@ -8,7 +8,7 @@ import android.graphics.Paint;
 public class SoldierPortrait implements IRenderable{
 
 	private float x,y;
-	private float width = 150, height = 150;
+	private float width, height;
 	private Soldier soldier;
 	private boolean selected = false;
 	
@@ -18,6 +18,8 @@ public class SoldierPortrait implements IRenderable{
 		this.soldier.setPortrait(this);
 		this.x = x;
 		this.y = y;
+		this.width = soldier.getWidth()*2;
+		this.height = soldier.getWidth()*2;
 	}
 	
 	public void setSelected(boolean value)

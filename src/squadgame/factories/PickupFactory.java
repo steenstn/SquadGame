@@ -3,6 +3,7 @@ package squadgame.factories;
 import squadgame.pickups.AbstractPickup;
 import squadgame.pickups.HealthPickup;
 import squadgame.pickups.RapidFirePickup;
+import squadgame.pickups.SpeedPickup;
 
 public class PickupFactory {
 
@@ -21,7 +22,9 @@ public class PickupFactory {
 		 * 
 		 *  
 		 */
-		if(result>0.5)
+		if(result > 0.6)
+			return new SpeedPickup(x,y);
+		else if(result>0.5)
 			return new RapidFirePickup(x,y);
 		else
 			return new HealthPickup(x,y);

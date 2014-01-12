@@ -3,47 +3,42 @@ package squadgame.pickups;
 import squadgame.entities.Soldier;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 
-public class RapidFirePickup extends AbstractPickup {
+public class SpeedPickup extends AbstractPickup {
 
-	
-	public RapidFirePickup(float x, float y)
+	private float powerUpSpeed = Soldier.originalMaxSpeed * 2;
+	public SpeedPickup(float x, float y)
 	{
 		super(x,y);
-		this.effectTime = 200;
-		this.pickupTime = 500;
+		this.effectTime = 250;
+		this.pickupTime = 550;
 		this.scoreForPickup = 20;
-		this.paint.setColor(Color.YELLOW);
+		this.paint.setColor(Color.RED);
 	}
-	
-	
 	@Override
 	public void render(Canvas c) {
 		if(pickedUp)
 			return;
 		c.drawCircle(x, y, width, paint);
 	}
+
 	@Override
 	public void activatePickup(Soldier soldier) {
-		soldier.setReloadCounter(10);
+		soldier.setSpeed(powerUpSpeed);
 	}
 
 	@Override
 	public void doEffect(Soldier soldier) {
 		this.effectTime--;
-		soldier.setReloadCounter(10);
+		soldier.setSpeed(powerUpSpeed);
 		if(effectTime < 1)
 			deactivatePickup(soldier);
 	}
+
 	@Override
 	public void deactivatePickup(Soldier soldier) {
-		soldier.setReloadCounter(Soldier.originalReloadSpeed);
-		active = false;
+		soldier.setSpeed(Soldier.originalMaxSpeed);
+		
 	}
-
-
-
-
 
 }

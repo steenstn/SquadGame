@@ -18,6 +18,9 @@ import android.view.WindowManager;
 
 public class Model {
 
+	//Chance for drop of pickup, the random number must be bigger for a drop
+	public static final float dropChance = 0.0f;
+	
 	public ArrayList<Soldier> soldiers;
 	public ArrayList<SoldierPortrait> portraits;
 	public ArrayList<Enemy> enemies;
@@ -49,11 +52,12 @@ public class Model {
 	    
 	    
 	    portraits = new ArrayList<SoldierPortrait>();
-	    portraits.add(new SoldierPortrait(soldiers.get(0),50,screenHeight-200));
-	    portraits.add(new SoldierPortrait(soldiers.get(1),250,screenHeight-200));
+	    int soldierWidth = soldiers.get(0).getWidth();
+	    portraits.add(new SoldierPortrait(soldiers.get(0),0,screenHeight-2*soldierWidth));
+	    portraits.add(new SoldierPortrait(soldiers.get(1),2.1f*soldierWidth,screenHeight-2*soldierWidth));
 	    
-	    portraits.add(new SoldierPortrait(soldiers.get(2),screenWidth-250-150-50,screenHeight-200));
-	    portraits.add(new SoldierPortrait(soldiers.get(3),screenWidth-250,screenHeight-200));
+	    portraits.add(new SoldierPortrait(soldiers.get(2),screenWidth-3.1f*soldierWidth-soldierWidth,screenHeight-2*soldierWidth));
+	    portraits.add(new SoldierPortrait(soldiers.get(3),screenWidth-2*soldierWidth,screenHeight-2*soldierWidth));
 	    
 	    enemies = new ArrayList<Enemy>();
 	    enemies.add(new Enemy(500,500));

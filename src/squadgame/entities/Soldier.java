@@ -8,16 +8,15 @@ import squadgame.main.Functions;
 import squadgame.main.Model;
 import squadgame.pickups.AbstractPickup;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
 
 public class Soldier implements IRenderable, IEntity{
 
 	public static final int originalReloadSpeed = 80;
+	public static final float originalMaxSpeed = 3;
 	private float x, y;
 	private float angle;
 	private float speed;
@@ -81,6 +80,11 @@ public class Soldier implements IRenderable, IEntity{
 	public void setImage(Bitmap image)
 	{
 		this.image = image;
+	}
+	
+	public void setSpeed(float speed)
+	{
+		this.speed = speed;
 	}
 	public void setReloadCounter(int value)
 	{
@@ -195,16 +199,15 @@ public class Soldier implements IRenderable, IEntity{
 	public void shoot(Model model)
 	{
 		currentReloadCounter--;
-		float deltaX = targetEnemy.getX() - x;
-		float deltaY = targetEnemy.getY() - y;
+		float deltaX = targetEnemy.getX()+targetEnemy.getWidth() - (x+width/2);
+		float deltaY = targetEnemy.getY()+targetEnemy.getWidth() - (y+width/2);
 		bulletAngle = (float) (Math.atan2(deltaY, deltaX));
 		if(currentReloadCounter <= 0)
 		{
 			currentReloadCounter = reloadCounter;
 			
-				
-			float bulletX = (float) (x+width/2 + width*Math.cos(bulletAngle));
-			float bulletY = (float) (y+width/2 + width*Math.sin(bulletAngle));
+			float bulletX = (float) (x+width/2 + 0.8*width*Math.cos(bulletAngle));
+			float bulletY = (float) (y+width/2 + 0.8*width*Math.sin(bulletAngle));
 			Bullet bullet = new Bullet(bulletX,bulletY,bulletAngle);
 			model.bullets.add(bullet);
 			model.renderables.add(bullet);

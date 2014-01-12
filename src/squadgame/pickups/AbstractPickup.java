@@ -1,5 +1,6 @@
 package squadgame.pickups;
 
+import android.graphics.Paint;
 import squadgame.entities.Soldier;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
@@ -16,6 +17,17 @@ public abstract class AbstractPickup implements IRenderable{
 	protected boolean active;
 	protected boolean pickedUp; // If this pickup has been picked up
 	protected int scoreForPickup = 0;
+	protected Paint paint;
+	public AbstractPickup(float x, float y)
+	{
+		this.x = x;
+		this.y = y;
+		this.active = true;
+		this.pickedUp = false;
+		this.width = 16;
+		this.paint = new Paint();
+		this.paint.setAntiAlias(true);
+	}
 	
 	public void countDownTimer()
 	{
