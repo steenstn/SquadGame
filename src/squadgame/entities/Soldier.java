@@ -10,6 +10,7 @@ import squadgame.pickups.AbstractPickup;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -234,9 +235,11 @@ public class Soldier implements IRenderable, IEntity{
 	  	c.drawBitmap(image, matrix, paint);
 	  	//c.drawRect(new Rect((int)x,(int)y,(int)x+ width,(int)y+width), paint);
 	  	
-	  	//c.drawLine(x+width/2, y+width/2,
-	  	//		(float)(x+width/2+2*width*Math.cos(bulletAngle)),  (float)(y+width/2+2*width*Math.sin(bulletAngle)), textPaint);
 	  	c.drawText(name, x-width, y-width, textPaint);
+	  	
+	  	Paint healthPaint = new Paint();
+	  	healthPaint.setColor(Color.GREEN);
+	  	c.drawRect(x-width, y+2*width, x-width+(((float)health/100.0f)*3*width), y+2*width+5, healthPaint);
 	  	//c.drawText("HP: " + health, x, y, textPaint);
 	  	//c.drawText("Pickups: " + pickups.size(), x, y+20, textPaint);
 	  	
