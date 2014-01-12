@@ -7,8 +7,12 @@ import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
 import squadgame.main.Model;
 import squadgame.pickups.AbstractPickup;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 public class Soldier implements IRenderable, IEntity{
 
@@ -28,7 +32,8 @@ public class Soldier implements IRenderable, IEntity{
 	private int health;
 	private boolean alive;
 	public ArrayList<AbstractPickup> pickups;
-	
+	private Bitmap image;
+	private Matrix matrix;
 	
 	public Soldier(String name, float x, float y,int r, int g,int b)
 	{
@@ -48,7 +53,10 @@ public class Soldier implements IRenderable, IEntity{
 		this.speed = 3;
 		this.reloadCounter = this.currentReloadCounter = 80;
 		
+		this.matrix = new Matrix();
+		
 		pickups = new ArrayList<AbstractPickup>();
+		
 	}
 	
 	public String getName() { return name; }
@@ -69,6 +77,10 @@ public class Soldier implements IRenderable, IEntity{
 		targetY = y;
 	}
 	
+	public void setImage(Bitmap image)
+	{
+		this.image = image;
+	}
 	public void setReloadCounter(int value)
 	{
 		reloadCounter = value;
@@ -190,8 +202,8 @@ public class Soldier implements IRenderable, IEntity{
 			currentReloadCounter = reloadCounter;
 			
 				
-			float bulletX = (float) (x + 1.5*width*Math.cos(bulletAngle));
-			float bulletY = (float) (y + 1.5*width*Math.sin(bulletAngle));
+			float bulletX = (float) (x+width/2 + 1.5*width*Math.cos(bulletAngle));
+			float bulletY = (float) (y+width/2 + 1.5*width*Math.sin(bulletAngle));
 			Bullet bullet = new Bullet(bulletX,bulletY,bulletAngle);
 			model.bullets.add(bullet);
 			model.renderables.add(bullet);
@@ -209,15 +221,26 @@ public class Soldier implements IRenderable, IEntity{
 	  	textPaint.setARGB(255, 255, 255, 255);
 	  	textPaint.setAntiAlias(true);
 	  	textPaint.setTextSize(20);
-	  	c.drawCircle(x+width/2, y+width/2, width, paint);
-	  	c.drawLine(x+width/2, y+width/2,
-	  			(float)(x+width/2+2*width*Math.cos(bulletAngle)),  (float)(y+width/2+2*width*Math.sin(bulletAngle)), textPaint);
-	  	c.drawText(name, x, y-20, textPaint);
-	  	c.drawText("HP: " + health, x, y, textPaint);
-	  	c.drawText("Pickups: " + pickups.size(), x, y+20, textPaint);
-	  	
+	  	//c.drawCircle(x+width/2, y+width/2, width, paint);
 	  	c.drawCircle(targetX, targetY,5,paint);
-  	
+	  	
+	  	matrix.setScale(4, 4);
+
+	  	matrix.postTranslate(x-width, y-width);
+	  	matrix.postRotate((float) (bulletAngle * 180f/Math.PI)+90,x+width/2,y+width/2);
+	  	
+
+	  	//c.drawBitmap(image, x, y, paint);
+	  	c.drawBitmap(image, matrix, paint);
+	  	//c.drawRect(new Rect((int)x,(int)y,(int)x+ width,(int)y+width), paint);
+	  	
+	  	//c.drawLine(x+width/2, y+width/2,
+	  	//		(float)(x+width/2+2*width*Math.cos(bulletAngle)),  (float)(y+width/2+2*width*Math.sin(bulletAngle)), textPaint);
+	  	c.drawText(name, x-width, y-width, textPaint);
+	  	//c.drawText("HP: " + health, x, y, textPaint);
+	  	//c.drawText("Pickups: " + pickups.size(), x, y+20, textPaint);
+	  	
+	  	
 	}
 
 }

@@ -11,6 +11,7 @@ import squadgame.interfaces.IRenderable;
 import squadgame.pickups.AbstractPickup;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.WindowManager;
@@ -28,8 +29,10 @@ public class Model {
 	public int screenWidth;
 	public int screenHeight;
 	public int score = 0;
+	private Context context;
 	public Model(Context ctx)
 	{
+		this.context = ctx;
 		WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 	    Display display = wm.getDefaultDisplay();
 	    Point size = new Point();
@@ -43,6 +46,7 @@ public class Model {
 	    soldiers.add(new Soldier("Pepper Jack", 100,screenHeight/2,0,0,255));
 	    soldiers.add(new Soldier("Jörgen Etwas", screenWidth-200,100,0,255,0));
 	    soldiers.add(new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0));
+	    
 	    
 	    portraits = new ArrayList<SoldierPortrait>();
 	    portraits.add(new SoldierPortrait(soldiers.get(0),50,screenHeight-200));
@@ -98,10 +102,19 @@ public class Model {
 	{
 
 	    renderables = new ArrayList<IRenderable>();
-	    for(Soldier soldier : soldiers)
-	    {
-	    	renderables.add(soldier);
-	    }
+	    soldiers.get(0).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_red));  
+    	renderables.add(soldiers.get(0));
+    	
+    	soldiers.get(1).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_blue));  
+    	renderables.add(soldiers.get(1));
+    	
+    	soldiers.get(2).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_green));  
+    	renderables.add(soldiers.get(2));
+    	
+    	soldiers.get(3).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_yellow));  
+    	renderables.add(soldiers.get(3));
+	 	   
+	    
 	    for(SoldierPortrait portrait : portraits)
 	    {
 	    	renderables.add(portrait);
