@@ -29,16 +29,14 @@ public class SpeedPickup extends AbstractPickup {
 
 	@Override
 	public void doEffect(Soldier soldier) {
-		this.effectTime--;
 		soldier.setSpeed(powerUpSpeed);
-		if(effectTime < 1)
-			deactivatePickup(soldier);
+		super.doEffect(soldier);
 	}
 
 	@Override
 	public void deactivatePickup(Soldier soldier) {
+		super.deactivatePickup(soldier);
 		soldier.setSpeed(Soldier.originalMaxSpeed);
-		
 	}
 
 }

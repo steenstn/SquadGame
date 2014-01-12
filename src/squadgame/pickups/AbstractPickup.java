@@ -1,5 +1,6 @@
 package squadgame.pickups;
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import squadgame.entities.Soldier;
 import squadgame.interfaces.IRenderable;
@@ -14,7 +15,7 @@ public abstract class AbstractPickup implements IRenderable{
 	protected int effectTime;
 	protected float x,y;
 	protected int width;
-	protected boolean active;
+	private boolean active;
 	protected boolean pickedUp; // If this pickup has been picked up
 	protected int scoreForPickup = 0;
 	protected Paint paint;
@@ -56,8 +57,20 @@ public abstract class AbstractPickup implements IRenderable{
 	public float getY() { return y; }
 	public int getWidth() { return width; }
 	public boolean isActive() { return active; }
+	
 	public abstract void activatePickup(Soldier soldier);
-	public abstract void doEffect(Soldier soldier);
-	public abstract void deactivatePickup(Soldier soldier);
+	
+	public void doEffect(Soldier soldier)
+	{
+		this.effectTime--;
+		if(effectTime < 0)
+		{
+			deactivatePickup(soldier);
+		}
+	}
+	public void deactivatePickup(Soldier soldier)
+	{
+		this.active = false;
+	}
 	
 }
