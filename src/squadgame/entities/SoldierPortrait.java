@@ -62,8 +62,8 @@ public class SoldierPortrait implements IRenderable{
 		  	Paint selectionPaint = new Paint();
 		  	selectionPaint.setARGB(255, 255, 255, 255);
 		  	selectionPaint.setStyle(Paint.Style.STROKE);
-		  	c.drawRect(soldier.getX()-soldier.getWidth(),soldier.getY()-soldier.getWidth(),
-	  			soldier.getX()+2*soldier.getWidth(),soldier.getY()+2*soldier.getWidth(),selectionPaint);
+		  	c.drawRect(soldier.getX(),soldier.getY(),
+	  			soldier.getX()+soldier.getWidth(),soldier.getY()+soldier.getWidth(),selectionPaint);
 	  	}
 	}
 }

@@ -23,7 +23,7 @@ public class Soldier implements IRenderable, IEntity{
 	private float speed;
 	private int red,green,blue;
 	private String name;
-	private int width = 30;
+	private int width = 64;
 	private float targetX, targetY;
 	private int currentReloadCounter;
 	private int reloadCounter;
@@ -180,8 +180,8 @@ public class Soldier implements IRenderable, IEntity{
 	public void updatePosition(Model model)
 	{
 		
-		float deltaX = targetX - x;
-		float deltaY = targetY - y;
+		float deltaX = targetX - (x+width/2);
+		float deltaY = targetY - (y+width/2);
 		if(Math.abs(deltaX) > 1 && Math.abs(deltaY) > 1)
 		{
 			angle = (float) (Math.atan2(deltaY, deltaX));
@@ -203,8 +203,8 @@ public class Soldier implements IRenderable, IEntity{
 			currentReloadCounter = reloadCounter;
 			
 				
-			float bulletX = (float) (x+width/2 + 1.5*width*Math.cos(bulletAngle));
-			float bulletY = (float) (y+width/2 + 1.5*width*Math.sin(bulletAngle));
+			float bulletX = (float) (x+width/2 + width*Math.cos(bulletAngle));
+			float bulletY = (float) (y+width/2 + width*Math.sin(bulletAngle));
 			Bullet bullet = new Bullet(bulletX,bulletY,bulletAngle);
 			model.bullets.add(bullet);
 			model.renderables.add(bullet);
@@ -225,9 +225,9 @@ public class Soldier implements IRenderable, IEntity{
 	  	//c.drawCircle(x+width/2, y+width/2, width, paint);
 	  	c.drawCircle(targetX, targetY,5,paint);
 	  	
-	  	matrix.setScale(4, 4);
+	  	//matrix.setScale(0.5f,0.5f);
 
-	  	matrix.postTranslate(x-width, y-width);
+	  	matrix.setTranslate(x, y);
 	  	matrix.postRotate((float) (bulletAngle * 180f/Math.PI)+90,x+width/2,y+width/2);
 	  	
 
@@ -235,11 +235,11 @@ public class Soldier implements IRenderable, IEntity{
 	  	c.drawBitmap(image, matrix, paint);
 	  	//c.drawRect(new Rect((int)x,(int)y,(int)x+ width,(int)y+width), paint);
 	  	
-	  	c.drawText(name, x-width, y-width, textPaint);
+	  	c.drawText(name, x-width/2, y-20, textPaint);
 	  	
 	  	Paint healthPaint = new Paint();
 	  	healthPaint.setColor(Color.GREEN);
-	  	c.drawRect(x-width, y+2*width, x-width+(((float)health/100.0f)*3*width), y+2*width+5, healthPaint);
+	  	c.drawRect(x, y+width+1, x+(((float)health/100.0f)*(1+width)), y+width+6, healthPaint);
 	  	//c.drawText("HP: " + health, x, y, textPaint);
 	  	//c.drawText("Pickups: " + pickups.size(), x, y+20, textPaint);
 	  	

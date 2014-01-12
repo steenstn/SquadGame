@@ -207,7 +207,7 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 	{
 		if(soldiers.size()<=0)
 			return;
-		float offset = soldiers.get(0).getWidth()*3;
+		float offset = soldiers.get(0).getWidth()*2;
 		switch(soldiers.size())
 		{
 		case 1:
