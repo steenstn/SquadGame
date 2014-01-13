@@ -11,6 +11,7 @@ import squadgame.interfaces.IRenderable;
 import squadgame.pickups.AbstractPickup;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.view.Display;
@@ -33,6 +34,7 @@ public class Model {
 	public int screenHeight;
 	public int score = 0;
 	private Context context;
+	public Bitmap background;
 	public Model(Context ctx)
 	{
 		this.context = ctx;
@@ -42,6 +44,7 @@ public class Model {
 	    display.getSize(size);
 	    screenWidth = size.x;
 	    screenHeight = size.y;
+	    background = BitmapFactory.decodeResource(context.getResources(),R.drawable.background);
 	    
 	    
 	    soldiers = new ArrayList<Soldier>();

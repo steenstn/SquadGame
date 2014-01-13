@@ -31,6 +31,7 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 	int pointerIndex2 = INVALID_POINTER_ID;
 	boolean movingScreen;
 
+	boolean select = false;
 	boolean portraitTouched = false;
 	boolean fingerMoving = false;
 	int screenWidth;
@@ -113,12 +114,18 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 				oldX = (event.getX());
 				oldY = (event.getY());
 				mActivePointerId = event.getPointerId(0);
-				for(SoldierPortrait portrait : model.portraits)
+				for(int i = 0; i < model.portraits.size(); i++)
 				{
+					SoldierPortrait portrait = model.portraits.get(i);
 					if(Functions.rectsOverlap(event.getX(), event.getY(), 1, 1, 
 						portrait.getX(), portrait.getY(), portrait.getWidth(), portrait.getHeight()))
 					{
-						portrait.setSelected(true);
+						for(int j = 0; j < model.portraits.size(); j++)
+						{
+								model.portraits.get(j).setSelected(false);
+						}
+						portrait.toggleSelected();
+						select = portrait.isSelected();
 						portraitTouched = true;
 						//return true;
 					}
@@ -138,7 +145,7 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 					if(Functions.rectsOverlap(event.getX(), event.getY(), 1, 1, 
 						portrait.getX(), portrait.getY(), portrait.getWidth(), portrait.getHeight()))
 					{
-						portrait.setSelected(true);
+						portrait.setSelected(select);
 						//return true;
 					}
 				}
@@ -170,12 +177,16 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 						portrait.getX(), portrait.getY(), portrait.getWidth(), portrait.getHeight()))
 					{
 						if(!fingerMoving)
-							portrait.toggleSelected();
+						{	
+							//portrait.toggleSelected();
+						
+						}
+
+						fingerMoving = false;
 						return true;
 					}
 
 				}
-				
 				for(Soldier soldier : model.soldiers)
 				{
 					// If a soldier is clicked on, select only that soldier

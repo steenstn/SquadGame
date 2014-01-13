@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.view.SurfaceHolder;
 
@@ -150,8 +151,10 @@ class RenderThread extends Thread {
 	  }
 	  
 	  private void doDraw(Canvas canvas) {
-	    canvas.drawColor(Color.BLACK);
-	    
+	    //canvas.drawColor(Color.BLACK);
+		  Paint paint = new Paint();
+	    //canvas.drawBitmap(model.background, 0, 0, paint);
+	    canvas.drawBitmap(model.background, null, new Rect(0,0,model.screenWidth,model.screenHeight), paint);
 	    for(int i = 0; i < model.renderables.size(); i++)
 	    {
 	    	model.renderables.get(i).render(canvas);
