@@ -114,7 +114,7 @@ class RenderThread extends Thread {
       		else
       		{
       			double chance = Math.random();
-      			if(chance>model.dropChance)
+      			if(chance>Model.dropChance)
       				model.createRandomPickup(enemy.getX(), enemy.getY());
       			
       			model.enemies.remove(i);
@@ -147,14 +147,6 @@ class RenderThread extends Thread {
       			model.renderables.remove(bullet);
       		}
       	}
-	  }
-	  
-	  public void waitOnResume()
-	  {
-		  while(userPaused)
-		  {
-			  
-		  }
 	  }
 	  
 	  private void doDraw(Canvas canvas) {

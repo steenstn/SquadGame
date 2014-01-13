@@ -24,8 +24,8 @@ public class Bullet implements IRenderable, IEntity{
 	@Override
 	public void updatePosition(Model model)
 	{
-		x += 6 * Math.cos(angle);
-		y += 6 * Math.sin(angle);
+		x += 7 * Math.cos(angle);
+		y += 7 * Math.sin(angle);
 
 		if(x > model.screenWidth || x < 0 || y > model.screenHeight || y < 0)
 		{

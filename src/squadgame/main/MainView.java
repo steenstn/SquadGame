@@ -30,7 +30,9 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 	int pointerIndex = INVALID_POINTER_ID;
 	int pointerIndex2 = INVALID_POINTER_ID;
 	boolean movingScreen;
-	
+
+	boolean portraitTouched = false;
+	boolean fingerMoving = false;
 	int screenWidth;
 	int screenHeight;
 	float screenX = -100, screenY = 0, offsetX = 0, offsetY = 0;
@@ -107,9 +109,20 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 		switch(event.getAction() & MotionEvent.ACTION_MASK)
 		{
 			case MotionEvent.ACTION_DOWN:
+				
 				oldX = (event.getX());
 				oldY = (event.getY());
 				mActivePointerId = event.getPointerId(0);
+				for(SoldierPortrait portrait : model.portraits)
+				{
+					if(Functions.rectsOverlap(event.getX(), event.getY(), 1, 1, 
+						portrait.getX(), portrait.getY(), portrait.getWidth(), portrait.getHeight()))
+					{
+						portrait.setSelected(true);
+						portraitTouched = true;
+						//return true;
+					}
+				}
 			break;
 			
 			case MotionEvent.ACTION_POINTER_DOWN:
@@ -119,6 +132,16 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 			break;
 			
 			case MotionEvent.ACTION_MOVE:
+				
+				for(SoldierPortrait portrait : model.portraits)
+				{
+					if(Functions.rectsOverlap(event.getX(), event.getY(), 1, 1, 
+						portrait.getX(), portrait.getY(), portrait.getWidth(), portrait.getHeight()))
+					{
+						portrait.setSelected(true);
+						//return true;
+					}
+				}
 				int numTouch = event.getPointerCount();
 				if(numTouch == 1)
 				{
@@ -130,7 +153,8 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 					
 					float dx = x - oldX;
 					float dy = y - oldY;
-					
+					if(Math.abs(dx) > 2 && Math.abs(dy) > 2)
+						fingerMoving = true;
 					screenX+= dx;
 					screenY-= dy;
 					oldX = x;
@@ -145,10 +169,13 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback, OnT
 					if(Functions.rectsOverlap(event.getX(), event.getY(), 1, 1, 
 						portrait.getX(), portrait.getY(), portrait.getWidth(), portrait.getHeight()))
 					{
-						portrait.toggleSelected();
+						if(!fingerMoving)
+							portrait.toggleSelected();
 						return true;
 					}
+
 				}
+				
 				for(Soldier soldier : model.soldiers)
 				{
 					// If a soldier is clicked on, select only that soldier

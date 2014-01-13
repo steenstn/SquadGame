@@ -30,6 +30,7 @@ public class Soldier implements IRenderable, IEntity{
 	private SoldierPortrait portrait;
 	private float bulletAngle;
 	private int health;
+	private int maxHealth;
 	private boolean alive;
 	public ArrayList<AbstractPickup> pickups;
 	private Bitmap image;
@@ -47,7 +48,7 @@ public class Soldier implements IRenderable, IEntity{
 		this.red = r;
 		this.green = g;
 		this.blue = b;
-		this.health = 100;
+		this.health = this.maxHealth = 100;
 		this.alive = true;
 		
 		this.speed = 3;
@@ -121,7 +122,7 @@ public class Soldier implements IRenderable, IEntity{
 		targetEnemy = enemies.get(indexOfClosestEnemy);
 	}
 	
-	public void addPickup(AbstractPickup pickup)
+	public void addAndActivatePickup(AbstractPickup pickup)
 	{
 		pickups.add(pickup);
 		pickup.activatePickup(this);
@@ -162,9 +163,9 @@ public class Soldier implements IRenderable, IEntity{
 	public void setHealth(int health)
 	{
 		this.health = health;
-		if(this.health>100)
+		if(this.health>maxHealth)
 		{
-			this.health = 100;
+			this.health = maxHealth;
 		}
 	}
 	
@@ -183,7 +184,6 @@ public class Soldier implements IRenderable, IEntity{
 	@Override
 	public void updatePosition(Model model)
 	{
-		
 		float deltaX = targetX - (x+width/2);
 		float deltaY = targetY - (y+width/2);
 		if(Math.abs(deltaX) > 1 && Math.abs(deltaY) > 1)

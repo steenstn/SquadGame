@@ -47,7 +47,7 @@ public class Model {
 	    soldiers = new ArrayList<Soldier>();
 	    soldiers.add(new Soldier("Bengelohanna", 100,100,255,0,0));
 	    soldiers.add(new Soldier("Pepper Jack", 100,screenHeight/2,0,0,255));
-	    soldiers.add(new Soldier("Jörgen Etwas", screenWidth-200,100,0,255,0));
+	    soldiers.add(new Soldier("Berik", screenWidth-200,100,0,255,0));
 	    soldiers.add(new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0));
 	    
 	    
@@ -92,6 +92,8 @@ public class Model {
 			}
 		}
 		Enemy enemy = new Enemy(newX,newY);
+		enemy.setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.enemy));
+    	
     	enemies.add(enemy);
     	renderables.add(enemy);
 	}
@@ -105,6 +107,7 @@ public class Model {
 	private void addRenderables()
 	{
 
+		// Set the images for all the soldiers
 	    renderables = new ArrayList<IRenderable>();
 	    soldiers.get(0).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_red));  
     	renderables.add(soldiers.get(0));
@@ -125,6 +128,7 @@ public class Model {
 	    }
 	    for(Enemy enemy:enemies)
 	    {
+	    	enemy.setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.enemy));
 	    	renderables.add(enemy);
 	    }
 	}

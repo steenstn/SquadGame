@@ -3,7 +3,9 @@ package squadgame.entities;
 import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Model;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 
 public class Enemy implements IRenderable, IEntity{
@@ -14,6 +16,8 @@ public class Enemy implements IRenderable, IEntity{
 	private int health;
 	private int width;
 	private boolean alive;
+	private Bitmap image;
+	private Matrix matrix;
 	
 	public Enemy(float x, float y)
 	{
@@ -21,8 +25,14 @@ public class Enemy implements IRenderable, IEntity{
 		this.y = y;
 		this.angle = this.targetAngle = (float) (Math.random()*2*Math.PI);
 		this.health = 100;
-		this.width = 25;
+		this.width = 64;
 		this.alive = true;
+		matrix = new Matrix();
+	}
+	
+	public void setImage(Bitmap image)
+	{
+		this.image = Bitmap.createBitmap(image);
 	}
 	
 	@Override
@@ -34,9 +44,9 @@ public class Enemy implements IRenderable, IEntity{
 		}
 		
 		if(angle < targetAngle)
-			angle+=0.1;
+			angle+=0.02;
 		else
-			angle-=0.1;
+			angle-=0.02;
 		
 		x += 0.5*Math.cos(angle);
 		y += 0.5*Math.sin(angle);
@@ -66,18 +76,19 @@ public class Enemy implements IRenderable, IEntity{
 	}
 
 	@Override
-	public void checkCollisions(Model model) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void checkCollisions(Model model) {}
 	
 	@Override
 	public void render(Canvas c) {
 		Paint paint = new Paint();
 		paint.setARGB(255, 150, 150, 150);
 		paint.setAntiAlias(true);
-		c.drawCircle(x+width/2, y+width/2, width, paint);
-		
+	//	c.drawCircle(x+width/2, y+width/2, width, paint);
+		matrix.setTranslate(x, y);
+	  	matrix.postRotate((float) (angle * 180f/Math.PI)+90,x+width/2,y+width/2);
+
+		c.drawBitmap(image, matrix, paint);
+
 	}
 
 

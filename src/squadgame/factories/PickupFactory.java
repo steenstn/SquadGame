@@ -7,7 +7,6 @@ import squadgame.pickups.SpeedPickup;
 
 public class PickupFactory {
 
-	
 	public AbstractPickup createRandomPickup(float x, float y)
 	{
 		double result = Math.random();
@@ -22,7 +21,7 @@ public class PickupFactory {
 		 * 
 		 *  
 		 */
-		if(result > 0.6)
+		if(result > 0.8)
 			return new SpeedPickup(x,y);
 		else if(result>0.5)
 			return new RapidFirePickup(x,y);

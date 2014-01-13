@@ -48,7 +48,7 @@ public abstract class AbstractPickup implements IRenderable{
 					soldier.getX(), soldier.getY(), soldier.getWidth(), soldier.getWidth()))
 				{
 					pickedUp = true;
-					soldier.addPickup(this);
+					soldier.addAndActivatePickup(this);
 					model.score += scoreForPickup;
 				}
 		}
@@ -68,6 +68,7 @@ public abstract class AbstractPickup implements IRenderable{
 			deactivatePickup(soldier);
 		}
 	}
+	
 	public void deactivatePickup(Soldier soldier)
 	{
 		this.active = false;
