@@ -9,7 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class MainActivity extends Activity {
-	
+
+	public static boolean printDebug = false;
 	MainView view;
 	
 	@Override
@@ -71,11 +72,15 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         
         switch (item.getItemId()) {
-	        case R.id.menu_settings:
-	        	Enemy enemy = new Enemy((float)(Math.random()*view.screenWidth),(float)(Math.random()*view.screenHeight));
-	        	view.model.enemies.add(enemy);
-	        	view.model.renderables.add(enemy);
-		        
+	        case R.id.menu_print_debug_info:
+	        	MainActivity.printDebug = !MainActivity.printDebug;
+	        	return true;
+	        case R.id.menu_spawn_pickup:
+	        	view.model.createRandomPickup((float)(Math.random()*view.screenWidth),(float)(Math.random()*view.screenHeight));
+	        	view.model.createRandomPickup((float)(Math.random()*view.screenWidth),(float)(Math.random()*view.screenHeight));
+	        	view.model.createRandomPickup((float)(Math.random()*view.screenWidth),(float)(Math.random()*view.screenHeight));
+	        	view.model.createRandomPickup((float)(Math.random()*view.screenWidth),(float)(Math.random()*view.screenHeight));
+	        	
 	        	return true;
             default:
                 return super.onOptionsItemSelected(item);

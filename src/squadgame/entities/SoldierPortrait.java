@@ -1,8 +1,10 @@
 package squadgame.entities;
 
 import squadgame.interfaces.IRenderable;
+import squadgame.main.MainActivity;
 import squadgame.pickups.AbstractPickup;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 public class SoldierPortrait implements IRenderable{
@@ -52,9 +54,22 @@ public class SoldierPortrait implements IRenderable{
 	  	textPaint.setTextSize(20);
 	  	
 	  	c.drawRect(x, y, x+width, y+height, paint);
-	  	c.drawText(soldier.getName(), x, y+height, textPaint);
-	  	c.drawText(soldier.getWeapon().getName(), x, y+20, textPaint);
-	  	c.drawText("rTime: " + soldier.getWeapon().getReloadTime(), x, y+40, textPaint);
+	  	c.drawText(soldier.getName(), x, y+20, textPaint);
+	  	c.drawText("HP: " + soldier.getHealth(), x, y+40, textPaint);
+	  	
+	  	if(MainActivity.printDebug) { // Print all picked up pickups and show their time
+	  		Paint tempPaint = new Paint();
+	  		tempPaint.setARGB(150,0,255,0);
+		  	for(int i = 0; i < soldier.pickups.size(); i++) {
+		  		c.drawRect(soldier.getX(), 20+soldier.getY()+20*i, 
+		  				soldier.getX()+soldier.pickups.get(i).getEffectTime()/2, -20+soldier.getY()+20*i+20, tempPaint);
+		  		
+		  		c.drawText(soldier.pickups.get(i).getClass().getSimpleName(),
+		  				soldier.getX(), 20+soldier.getY()+20*i, textPaint);
+		  	}
+	  	}
+	  	c.drawText(soldier.getWeapon().getName(), x, y+height, textPaint);
+	  	
 	  	
 	  	
 	  	if(selected)

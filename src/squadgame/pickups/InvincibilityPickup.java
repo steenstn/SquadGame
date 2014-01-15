@@ -4,15 +4,16 @@ import squadgame.entities.Soldier;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
-public class HealthPickup extends AbstractPickup {
+public class InvincibilityPickup extends AbstractPickup {
 
-	public HealthPickup(float x, float y)
+	int health;
+	public InvincibilityPickup(float x, float y)
 	{
 		super(x,y);
-		this.effectTime = 15;
+		this.effectTime = 350;
 		this.pickupTime = 500;
 		this.scoreForPickup = 10;
-		this.paint.setColor(Color.GREEN);
+		this.paint.setColor(Color.CYAN);
 	}
 	
 	
@@ -24,15 +25,18 @@ public class HealthPickup extends AbstractPickup {
 	}
 	@Override
 	public void activatePickup(Soldier soldier) {
+		health = soldier.getHealth();
+		soldier.healthPaint.setColor(Color.CYAN);
 	}
 	@Override
 	public void deactivatePickup(Soldier soldier) {
 		super.deactivatePickup(soldier);
+		soldier.healthPaint.setColor(Color.GREEN);
 	}
 
 	@Override
 	public void doEffect(Soldier soldier) {
-		soldier.setHealth(soldier.getHealth() + 1);
+		soldier.setHealth(health);
 		super.doEffect(soldier);
 	}
 

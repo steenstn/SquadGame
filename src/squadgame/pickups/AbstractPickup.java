@@ -57,6 +57,7 @@ public abstract class AbstractPickup implements IRenderable{
 	public float getY() { return y; }
 	public int getWidth() { return width; }
 	public boolean isActive() { return active; }
+	public int getEffectTime() { return effectTime; }
 	
 	public abstract void activatePickup(Soldier soldier);
 	

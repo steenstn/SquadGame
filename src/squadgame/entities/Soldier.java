@@ -33,6 +33,7 @@ public class Soldier implements IRenderable, IEntity{
 	private int maxHealth;
 	private boolean alive;
 	public ArrayList<AbstractPickup> pickups;
+	public Paint healthPaint = new Paint();
 	private Bitmap image;
 	private Matrix matrix;
 	
@@ -44,7 +45,8 @@ public class Soldier implements IRenderable, IEntity{
 		
 		this.targetX = x;
 		this.targetY = y;
-		
+
+	  	healthPaint.setColor(Color.GREEN);
 		this.weapon = new SingleBulletGun("Pistol", this, 100, 20, 80);
 		
 		this.red = r;
@@ -235,8 +237,7 @@ public class Soldier implements IRenderable, IEntity{
 	  	
 	  	c.drawText(name, x-width/2, y-20, textPaint);
 	  	
-	  	Paint healthPaint = new Paint();
-	  	healthPaint.setColor(Color.GREEN);
+	  	
 	  	c.drawRect(x, y+width+1, x+(((float)health/100.0f)*(1+width)), y+width+6, healthPaint);
 	  	//c.drawText("HP: " + health, x, y, textPaint);
 	  	//c.drawText("Pickups: " + pickups.size(), x, y+20, textPaint);
