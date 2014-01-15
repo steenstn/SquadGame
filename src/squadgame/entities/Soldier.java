@@ -7,6 +7,8 @@ import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
 import squadgame.main.Model;
 import squadgame.pickups.AbstractPickup;
+import squadgame.weapons.AbstractWeapon;
+import squadgame.weapons.Pistol;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,17 +17,15 @@ import android.graphics.Paint;
 
 public class Soldier implements IRenderable, IEntity{
 
-	public static final int originalReloadSpeed = 80;
 	public static final float originalMaxSpeed = 3;
 	private float x, y;
 	private float angle;
 	private float speed;
 	private int red,green,blue;
 	private String name;
+	private AbstractWeapon weapon;
 	private int width = 64;
 	private float targetX, targetY;
-	private int currentReloadCounter;
-	private int reloadCounter;
 	private Enemy targetEnemy;
 	private SoldierPortrait portrait;
 	private float bulletAngle;
@@ -45,6 +45,8 @@ public class Soldier implements IRenderable, IEntity{
 		this.targetX = x;
 		this.targetY = y;
 		
+		this.weapon = new Pistol("Pistol", this, 100, 20, 80);
+		
 		this.red = r;
 		this.green = g;
 		this.blue = b;
@@ -52,7 +54,6 @@ public class Soldier implements IRenderable, IEntity{
 		this.alive = true;
 		
 		this.speed = 3;
-		this.reloadCounter = this.currentReloadCounter = 80;
 		
 		this.matrix = new Matrix();
 		
@@ -62,12 +63,11 @@ public class Soldier implements IRenderable, IEntity{
 	
 	public String getName() { return name; }
 	public SoldierPortrait getPortrait() { return portrait; }
-	public int getReloadCounter() { return reloadCounter; }
-	public int getCurrentReloadCounter() { return currentReloadCounter; }
 	
 	public float getX() { return x; }
 	public float getY() { return y; }
 	public int getWidth() { return width; }
+	public AbstractWeapon getWeapon() { return weapon; }
 	public int red() { return red; }
 	public int green() { return green; }
 	public int blue() { return blue; }
@@ -86,12 +86,6 @@ public class Soldier implements IRenderable, IEntity{
 	public void setSpeed(float speed)
 	{
 		this.speed = speed;
-	}
-	public void setReloadCounter(int value)
-	{
-		reloadCounter = value;
-		if(reloadCounter < 10)
-			reloadCounter = 10;
 	}
 	
 	public void setPortrait(SoldierPortrait portrait)
@@ -198,17 +192,17 @@ public class Soldier implements IRenderable, IEntity{
 	
 	public void shoot(Model model)
 	{
-		currentReloadCounter--;
-		float deltaX = targetEnemy.getX()+targetEnemy.getWidth() - (x+width/2);
-		float deltaY = targetEnemy.getY()+targetEnemy.getWidth() - (y+width/2);
-		bulletAngle = (float) (Math.atan2(deltaY, deltaX));
-		if(currentReloadCounter <= 0)
-		{
-			currentReloadCounter = reloadCounter;
+		System.out.println(this.name  + " shoots!");
+		weapon.reload();
+		if(weapon.isReloaded() && weapon.hasAmmo()) {
+			float deltaX = targetEnemy.getX()+targetEnemy.getWidth() - (x+width/2);
+			float deltaY = targetEnemy.getY()+targetEnemy.getWidth() - (y+width/2);
+			bulletAngle = (float) (Math.atan2(deltaY, deltaX));
 			
 			float bulletX = (float) (x+width/2 + 0.8*width*Math.cos(bulletAngle));
 			float bulletY = (float) (y+width/2 + 0.8*width*Math.sin(bulletAngle));
-			Bullet bullet = new Bullet(bulletX,bulletY,bulletAngle);
+			Bullet bullet = weapon.shoot(bulletX, bulletY, bulletAngle);
+
 			model.bullets.add(bullet);
 			model.renderables.add(bullet);
 		}
@@ -225,7 +219,7 @@ public class Soldier implements IRenderable, IEntity{
 	  	textPaint.setARGB(255, 255, 255, 255);
 	  	textPaint.setAntiAlias(true);
 	  	textPaint.setTextSize(20);
-	  	//c.drawCircle(x+width/2, y+width/2, width, paint);
+
 	  	c.drawCircle(targetX, targetY,5,paint);
 	  	
 	  	//matrix.setScale(0.5f,0.5f);

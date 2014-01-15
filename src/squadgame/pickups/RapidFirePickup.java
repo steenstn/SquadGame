@@ -26,18 +26,18 @@ public class RapidFirePickup extends AbstractPickup {
 	}
 	@Override
 	public void activatePickup(Soldier soldier) {
-		soldier.setReloadCounter(10);
+		soldier.getWeapon().setReloadTime(10);
 	}
 
 	@Override
 	public void doEffect(Soldier soldier) {
-		soldier.setReloadCounter(10);
+		soldier.getWeapon().setReloadTime(10);
 		super.doEffect(soldier);
 	}
 	@Override
 	public void deactivatePickup(Soldier soldier) {
 		super.deactivatePickup(soldier);
-		soldier.setReloadCounter(Soldier.originalReloadSpeed);
+		soldier.getWeapon().resetReloadTime();
 	}
 
 

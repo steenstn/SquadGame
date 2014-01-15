@@ -12,13 +12,14 @@ public class Bullet implements IRenderable, IEntity{
 	float x,y;
 	float angle;
 	boolean alive;
-	private int damage = 20;
-	public Bullet(float x, float y, float angle)
+	private int damage;
+	public Bullet(float x, float y, float angle, int damage)
 	{
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
 		this.alive = true;
+		this.damage = damage;
 	}
 	
 	@Override
@@ -45,11 +46,9 @@ public class Bullet implements IRenderable, IEntity{
 				enemy.takeDamage(damage);
 			}
 		}
-		for(Soldier soldier : model.soldiers)
-		{
+		for(Soldier soldier : model.soldiers) {
 			if(alive && Functions.rectsOverlap(x, y, 4, 4, 
-					soldier.getX(), soldier.getY(), soldier.getWidth(), soldier.getWidth()))
-			{
+			   soldier.getX(), soldier.getY(), soldier.getWidth(), soldier.getWidth())) {
 				this.alive = false;
 				soldier.takeDamage(damage);
 			}
