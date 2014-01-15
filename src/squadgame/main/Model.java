@@ -9,6 +9,7 @@ import squadgame.entities.SoldierPortrait;
 import squadgame.factories.PickupFactory;
 import squadgame.interfaces.IRenderable;
 import squadgame.pickups.AbstractPickup;
+import squadgame.weapons.MultipleBulletsGun;
 import squadgame.weapons.SingleBulletGun;
 
 import android.content.Context;
@@ -49,11 +50,18 @@ public class Model {
 	    
 	    
 	    soldiers = new ArrayList<Soldier>();
-	    soldiers.add(new Soldier("Bengelohanna", 100,100,255,0,0));
-	    soldiers.add(new Soldier("Pepper Jack", 100,screenHeight/2,0,0,255));
-	    soldiers.get(1).setWeapon(new SingleBulletGun("Machine gun", soldiers.get(1), 200, 10, 30));
-	    soldiers.add(new Soldier("Berik", screenWidth-200,100,0,255,0));
-	    soldiers.add(new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0));
+	    Soldier soldier1 = new Soldier("Bengelohanna", 100,100,255,0,0);
+	    soldier1.setWeapon(new MultipleBulletsGun("Shotgun", soldier1, 200, 10, 80));
+	    
+	    Soldier soldier2 = new Soldier("Pepper Jack", 100,screenHeight/2,0,0,255);
+	    soldier2.setWeapon(new SingleBulletGun("Machine gun", soldier2, 200, 10, 30));
+	    
+	    Soldier soldier3 = new Soldier("Berik", screenWidth-200,100,0,255,0);
+	    Soldier soldier4 = new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0);
+	    soldiers.add(soldier1);
+	    soldiers.add(soldier2);
+	    soldiers.add(soldier3);
+	    soldiers.add(soldier4);
 	    
 	    
 	    portraits = new ArrayList<SoldierPortrait>();

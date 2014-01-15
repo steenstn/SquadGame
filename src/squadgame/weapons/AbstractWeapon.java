@@ -1,5 +1,7 @@
 package squadgame.weapons;
 
+import java.util.ArrayList;
+
 import squadgame.entities.Bullet;
 import squadgame.entities.Soldier;
 
@@ -63,7 +65,7 @@ public abstract class AbstractWeapon {
 		return ammo >= 0;
 	}
 	
-	public abstract Bullet shoot(float x, float y, float angle);
+	public abstract ArrayList<Bullet> shoot(float x, float y, float angle);
 	
 	protected void resetReloadCounter() {
 		reloadCounter = reloadTime;

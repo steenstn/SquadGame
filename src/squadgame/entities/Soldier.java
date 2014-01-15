@@ -204,10 +204,11 @@ public class Soldier implements IRenderable, IEntity{
 			
 			float bulletX = (float) (x+width/2 + 0.8*width*Math.cos(bulletAngle));
 			float bulletY = (float) (y+width/2 + 0.8*width*Math.sin(bulletAngle));
-			Bullet bullet = weapon.shoot(bulletX, bulletY, bulletAngle);
-
-			model.bullets.add(bullet);
-			model.renderables.add(bullet);
+			ArrayList<Bullet> bullets = weapon.shoot(bulletX, bulletY, bulletAngle);
+			for(Bullet bullet : bullets) {
+				model.bullets.add(bullet);
+				model.renderables.add(bullet);
+			}
 		}
 	}
 	
