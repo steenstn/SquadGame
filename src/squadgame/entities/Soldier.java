@@ -150,17 +150,19 @@ public class Soldier implements IRenderable, IEntity{
 		}
 	}
 	
-	public int getHealth()
-	{
+	public int getHealth() {
 		return health;
 	}
-	public void setHealth(int health)
-	{
+	
+	public void setHealth(int health) {
 		this.health = health;
-		if(this.health>maxHealth)
-		{
+		if(this.health>maxHealth) {
 			this.health = maxHealth;
 		}
+	}
+	
+	public void setWeapon(AbstractWeapon weapon) {
+		this.weapon = weapon;
 	}
 	
 	public void takeDamage(int damage)
@@ -192,7 +194,6 @@ public class Soldier implements IRenderable, IEntity{
 	
 	public void shoot(Model model)
 	{
-		System.out.println(this.name  + " shoots!");
 		weapon.reload();
 		if(weapon.isReloaded() && weapon.hasAmmo()) {
 			float deltaX = targetEnemy.getX()+targetEnemy.getWidth() - (x+width/2);

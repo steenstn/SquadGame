@@ -3,10 +3,10 @@ package squadgame.pickups;
 import squadgame.entities.Soldier;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 
 public class RapidFirePickup extends AbstractPickup {
 
+	int newReloadTime;
 	
 	public RapidFirePickup(float x, float y)
 	{
@@ -26,12 +26,13 @@ public class RapidFirePickup extends AbstractPickup {
 	}
 	@Override
 	public void activatePickup(Soldier soldier) {
-		soldier.getWeapon().setReloadTime(10);
+		newReloadTime = soldier.getWeapon().getReloadTime() / 2;
+		soldier.getWeapon().setReloadTime(newReloadTime);
 	}
 
 	@Override
 	public void doEffect(Soldier soldier) {
-		soldier.getWeapon().setReloadTime(10);
+		soldier.getWeapon().setReloadTime(newReloadTime);
 		super.doEffect(soldier);
 	}
 	@Override

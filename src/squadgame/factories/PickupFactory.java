@@ -7,8 +7,21 @@ import squadgame.pickups.SpeedPickup;
 
 public class PickupFactory {
 
+	private boolean debug = true;
+	private int whichPickup = 1;
+	
 	public AbstractPickup createRandomPickup(float x, float y)
 	{
+		if(debug) {
+			switch(whichPickup) {
+			case 1:
+				return new RapidFirePickup(x,y);
+			case 2:
+				return new SpeedPickup(x,y);
+			case 3:
+				return new HealthPickup(x,y);
+			}
+		}
 		double result = Math.random();
 		
 		// The pickups that can be spawned, a higher number is lower chance

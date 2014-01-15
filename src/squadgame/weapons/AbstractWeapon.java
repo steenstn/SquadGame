@@ -5,7 +5,7 @@ import squadgame.entities.Soldier;
 
 public abstract class AbstractWeapon {
 
-	protected int defaultReloadTime = 80;
+	protected int defaultReloadTime;
 	private String name;
 	protected Soldier soldier;
 	protected int ammo;
@@ -27,12 +27,11 @@ public abstract class AbstractWeapon {
 		this.soldier = soldier;
 		this.ammo = ammo;
 		this.damage = damage;
-		this.reloadTime = this.reloadCounter = reloadTime;
+		this.reloadTime = this.reloadCounter = this.defaultReloadTime = reloadTime;
 		this.reloaded = true;
 	}
 	
 	public void reload() {
-		System.out.println(this.soldier.getName()  + " reloads!");
 		reloadCounter--;
 		if(reloadCounter <= 0) {
 			reloadCounter = reloadTime;
@@ -40,12 +39,20 @@ public abstract class AbstractWeapon {
 		}
 	}
 	
+	public String getName() {
+		return name;
+	}
 	public boolean isReloaded() {
 		return reloaded;
 	}
 	
 	public void setReloadTime(int value) {
 		this.reloadTime = value > 10 ? value : 10;
+		System.out.println("Set speed to " + this.reloadTime);
+	}
+	
+	public int getReloadTime() {
+		return reloadTime;
 	}
 	
 	public void resetReloadTime() {
