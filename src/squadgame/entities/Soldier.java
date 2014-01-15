@@ -8,7 +8,7 @@ import squadgame.main.Functions;
 import squadgame.main.Model;
 import squadgame.pickups.AbstractPickup;
 import squadgame.weapons.AbstractWeapon;
-import squadgame.weapons.Pistol;
+import squadgame.weapons.SingleBulletGun;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -45,7 +45,7 @@ public class Soldier implements IRenderable, IEntity{
 		this.targetX = x;
 		this.targetY = y;
 		
-		this.weapon = new Pistol("Pistol", this, 100, 20, 80);
+		this.weapon = new SingleBulletGun("Pistol", this, 100, 20, 80);
 		
 		this.red = r;
 		this.green = g;
