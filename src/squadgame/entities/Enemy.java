@@ -2,9 +2,11 @@ package squadgame.entities;
 
 import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
+import squadgame.main.MainActivity;
 import squadgame.main.Model;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
@@ -17,6 +19,7 @@ public class Enemy implements IRenderable, IEntity{
 	private int width;
 	private boolean alive;
 	private Bitmap image;
+	private Paint healthPaint = new Paint();
 	private Matrix matrix;
 	
 	public Enemy(float x, float y)
@@ -28,6 +31,7 @@ public class Enemy implements IRenderable, IEntity{
 		this.width = 64;
 		this.alive = true;
 		matrix = new Matrix();
+		healthPaint.setColor(Color.GREEN);
 	}
 	
 	public void setImage(Bitmap image)
@@ -84,10 +88,15 @@ public class Enemy implements IRenderable, IEntity{
 		paint.setARGB(255, 150, 150, 150);
 		paint.setAntiAlias(true);
 	//	c.drawCircle(x+width/2, y+width/2, width, paint);
+		
 		matrix.setTranslate(x, y);
 	  	matrix.postRotate((float) (angle * 180f/Math.PI)+90,x+width/2,y+width/2);
 
 		c.drawBitmap(image, matrix, paint);
+		if(MainActivity.printDebug) {
+			c.drawRect(x, y+width+1, x+(((float)health/100.0f)*(1+width)), y+width+6, healthPaint);
+		  	
+		}
 
 	}
 
