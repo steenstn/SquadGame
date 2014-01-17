@@ -51,7 +51,6 @@ public abstract class AbstractWeapon {
 	
 	public void setReloadTime(int value) {
 		this.reloadTime = value > 10 ? value : 10;
-		System.out.println("Set speed to " + this.reloadTime);
 	}
 	
 	public int getReloadTime() {

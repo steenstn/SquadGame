@@ -59,7 +59,7 @@ public class Model {
 	    soldier2.setWeapon(new SingleBulletGun("Machine gun", soldier2, 200, 10, 30));
 	    
 	    Soldier soldier3 = new Soldier("Berik", screenWidth-200,100,0,255,0);
-	    soldier3.setWeapon(new LaserGun("Laser", soldier3, 200, 8, 50));
+	    soldier3.setWeapon(new LaserGun("Laser", soldier3, 200, 80, 50));
 	    
 	    Soldier soldier4 = new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0);
 	    soldiers.add(soldier1);

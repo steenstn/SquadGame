@@ -41,38 +41,39 @@ public class LaserBullet extends AbstractBullet {
 			return;
 		
 		for(Enemy enemy : model.enemies) {
-			Vec2 c = new Vec2(enemy.getX(), enemy.getY());
-			float r = enemy.getWidth()*enemy.getWidth();
+			Vec2 c = new Vec2(enemy.getX()+enemy.getWidth()/2, enemy.getY()+enemy.getWidth()/2);
+			float r = (enemy.getWidth()/2) * (enemy.getWidth()/2);
 			
 			float underSquareRoot = checkLineIntersection(c, l, o, r);
 			underSquareRoot = (float) Math.sqrt(underSquareRoot);
 			if(underSquareRoot >= 0) {
-				float l2 = l.dot(l);
 				float startPoint = -(l.dot(o.minus(c)));
-				float res1 = (startPoint + underSquareRoot)/l2;
-				float res2 = (startPoint - underSquareRoot)/l2;
-				if( res1 > 0 ||
-				   res2 > 0) {
+				float res1 = (startPoint + underSquareRoot);
+				float res2 = (startPoint - underSquareRoot);
+				if( res1 > 1 ||
+				   res2 > 1) {
 					enemy.takeDamage(damage);
 				}
 			}
 		}
 		
 		for(Soldier soldier : model.soldiers) {
-			Vec2 c = new Vec2(soldier.getX(), soldier.getY());
-			float r = soldier.getWidth()*soldier.getWidth()*0.8f;
+			Vec2 c = new Vec2(soldier.getX()+soldier.getWidth()/2, soldier.getY()+soldier.getWidth()/2);
+			float r = (soldier.getWidth()/2) * (soldier.getWidth()/2);
 			
 			float underSquareRoot = checkLineIntersection(c, l, o, r);
 			underSquareRoot = (float) Math.sqrt(underSquareRoot);
 			if(underSquareRoot >= 0) {
-				float l2 = l.dot(l);
 				float startPoint = -(l.dot(o.minus(c)));
-				float res1 = (startPoint + underSquareRoot)/l2;
-				float res2 = (startPoint - underSquareRoot)/l2;
-				if( res1 > 0 ||
-				   res2 > 0) {
+				float res1 = (startPoint + underSquareRoot);
+				float res2 = (startPoint - underSquareRoot);
+				if( res1 > 1 ||
+				   res2 > 1) {
 					soldier.healthPaint.setColor(Color.RED);//;takeDamage(damage);
+					System.out.println(soldier.getName() + " hit by laser");
+					
 				}
+				
 			}
 		}
 		alive = false;
@@ -83,7 +84,7 @@ public class LaserBullet extends AbstractBullet {
 		float part1 = (l.dot(o.minus(c)));
 		part1*=part1;
 		
-		float part2 = (l.dot(l)) * ( (o.minus(c)).dot(o.minus(c)) - r);
+		float part2 =  ( (o.minus(c)).dot(o.minus(c)) - r);
 		
 		float res = part1 - part2;
 		return res;
@@ -113,7 +114,7 @@ public class LaserBullet extends AbstractBullet {
 			return new Vec2(x,y);
 		}
 		public float dot(Vec2 in) {
-			return in.x * x + in.y *y;
+			return in.x * x + in.y * y;
 		}
 	}
 

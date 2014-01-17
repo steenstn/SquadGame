@@ -164,6 +164,11 @@ class RenderThread extends Thread {
 	    textPaint.setTextSize(30);
 	    textPaint.setColor(Color.WHITE);
 	    canvas.drawText("Score: " + model.score, 10, 50, textPaint);
+	    if(MainActivity.printDebug)
+	    {
+	    	canvas.drawText("Enemies: " + model.enemies.size(), 10, 80, textPaint);
+		    
+	    }
 	    if(model.soldiers.size() == 0)
 	    {
 	    	Paint gameOverPaint = new Paint();

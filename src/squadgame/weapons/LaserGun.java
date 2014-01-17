@@ -21,7 +21,7 @@ public class LaserGun extends AbstractWeapon {
 		float spawnX = (float) (x+5*Math.cos(angle));
 		float spawnY = (float) (y+5*Math.sin(angle));
 		
-		bullets.add(new LaserBullet(spawnX, spawnY, angle, damage));
+		bullets.add(new LaserBullet(x, y, angle, damage));
 		
 		return bullets;
 	}
