@@ -40,6 +40,7 @@ public class LaserBullet extends AbstractBullet {
 			return;
 		
 		for(Enemy enemy : model.enemies) {
+			model.collisionChecks++;
 			Vec2 c = new Vec2(enemy.getCenterX(), enemy.getCenterY());
 			float r = (enemy.getWidth()/2) * (enemy.getWidth()/2);
 			
@@ -53,6 +54,7 @@ public class LaserBullet extends AbstractBullet {
 		}
 		
 		for(Soldier soldier : model.soldiers) {
+			model.collisionChecks++;
 			Vec2 c = new Vec2(soldier.getCenterX(), soldier.getCenterY());
 			float r = (soldier.getWidth()/2) * (soldier.getWidth()/2);
 			

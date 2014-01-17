@@ -37,7 +37,8 @@ class RenderThread extends Thread {
 	      try {
 	        c = sh.lockCanvas(null);
 	        synchronized (sh) {
-	        	//resetQuadTree();
+	        	model.collisionChecks = 0;
+	        	resetQuadTree();
 	        	updateSoldiers();
 	        	updatePickups();
 	        	updateEnemies();
@@ -66,8 +67,10 @@ class RenderThread extends Thread {
 	  {
 		  model.quadTree.clear();
 		  for (Enemy enemy : model.enemies) {
-			  Rectangle enemyDimensions = new Rectangle((int)enemy.getX(), (int)enemy.getY(), enemy.getWidth(), enemy.getWidth());
-			  model.quadTree.insert(enemyDimensions);
+			  if(enemy.isActive()) {
+				  Rectangle enemyDimensions = new Rectangle((int)enemy.getX(), (int)enemy.getY(), enemy.getWidth(), enemy.getWidth());
+				  model.quadTree.insert(enemyDimensions);
+			  }
 		  }
 	  }
 	  private void updateSoldiers()
@@ -177,7 +180,7 @@ class RenderThread extends Thread {
 	    if(MainActivity.printDebug)
 	    {
 	    	canvas.drawText("Enemies: " + model.enemies.size(), 10, 80, textPaint);
-		    
+		    canvas.drawText("Collision checks: " + model.collisionChecks, 10, 110, textPaint);
 	    }
 	    if(model.soldiers.size() == 0)
 	    {

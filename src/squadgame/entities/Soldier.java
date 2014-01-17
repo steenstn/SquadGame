@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import squadgame.bullets.AbstractBullet;
-import squadgame.bullets.StandardBullet;
 import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
@@ -18,7 +17,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.widget.Toast;
 
 public class Soldier implements IRenderable, IEntity {
 
@@ -131,28 +129,25 @@ public class Soldier implements IRenderable, IEntity {
 	
 	@Override
 	public void checkCollisions(Model model) {
-		for(Enemy enemy : model.enemies) {
+		/*for(Enemy enemy : model.enemies) {
+		  model.collisionChecks++;
 			if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
 				takeDamage(0);
 		}
-		/*
+		*/
 		List<Rectangle> returnObjects = new ArrayList<Rectangle>();
-		for (int i = 0; i < model.enemies.size(); i++) {
+		for (Enemy enemy : model.enemies) {
 		  returnObjects.clear();
 		  Rectangle soldierDimensions = new Rectangle((int)x, (int)y, width, width);
 		  model.quadTree.retrieve(returnObjects, soldierDimensions);
 		 
-		  try {
-		  for (int x = 0; x < returnObjects.size(); x++) {
-			  if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, returnObjects.get(i).getX(), returnObjects.get(i).getY(), returnObjects.get(i).getWidth(), returnObjects.get(i).getWidth()))
+		  for (Rectangle rectangle : returnObjects) {
+			  model.collisionChecks++;
+			  if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, 
+					  rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getWidth()))
 					takeDamage(0);
 		  }
-		  }
-		  catch(IndexOutOfBoundsException e)
-		  {
-			  System.out.println("Out of bounds" + e);
-		  }
-		}*/
+		}
 	}
 	
 	public void usePickups() {

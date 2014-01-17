@@ -44,6 +44,7 @@ public abstract class AbstractPickup implements IRenderable{
 	public void checkCollisions(Model model) {
 		for(Soldier soldier : model.soldiers)
 		{
+			model.collisionChecks++;
 			if(!pickedUp && Functions.rectsOverlap(x, y, width, width,
 					soldier.getX(), soldier.getY(), soldier.getWidth(), soldier.getWidth()))
 				{

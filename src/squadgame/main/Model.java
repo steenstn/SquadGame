@@ -20,7 +20,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.WindowManager;
-import android.graphics.Rect;
 
 public class Model {
 
@@ -33,7 +32,7 @@ public class Model {
 	public ArrayList<IRenderable> renderables;
 	public ArrayList<AbstractBullet> bullets;
 	public ArrayList<AbstractPickup> pickups;
-	
+	public int collisionChecks = 0;
 	private PickupFactory pickupFactory = new PickupFactory();
 	public int screenWidth;
 	public int screenHeight;
@@ -64,7 +63,7 @@ public class Model {
 	    soldier2.setWeapon(new SingleBulletGun("Machine gun", soldier2, 200, 10, 30));
 	    
 	    Soldier soldier3 = new Soldier("Berik", screenWidth-200,100,0,255,0);
-	    soldier3.setWeapon(new LaserGun("Laser", soldier3, 200, 30, 120));
+	    soldier3.setWeapon(new LaserGun("Laser", soldier3, 200, 80, 50));
 	    
 	    Soldier soldier4 = new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0);
 	    soldiers.add(soldier1);
