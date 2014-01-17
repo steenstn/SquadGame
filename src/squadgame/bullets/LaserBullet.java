@@ -41,37 +41,27 @@ public class LaserBullet extends AbstractBullet {
 			return;
 		
 		for(Enemy enemy : model.enemies) {
-			Vec2 c = new Vec2(enemy.getX()+enemy.getWidth()/2, enemy.getY()+enemy.getWidth()/2);
+			Vec2 c = new Vec2(enemy.getCenterX(), enemy.getCenterY());
 			float r = (enemy.getWidth()/2) * (enemy.getWidth()/2);
 			
 			float underSquareRoot = checkLineIntersection(c, l, o, r);
 			underSquareRoot = (float) Math.sqrt(underSquareRoot);
 			if(underSquareRoot >= 0) {
-				float startPoint = -(l.dot(o.minus(c)));
-				float res1 = (startPoint + underSquareRoot);
-				float res2 = (startPoint - underSquareRoot);
-				if( res1 > 1 ||
-				   res2 > 1) {
+				if(hitInFrontOfOrigin(c, l, o, underSquareRoot)) {
 					enemy.takeDamage(damage);
 				}
 			}
 		}
 		
 		for(Soldier soldier : model.soldiers) {
-			Vec2 c = new Vec2(soldier.getX()+soldier.getWidth()/2, soldier.getY()+soldier.getWidth()/2);
+			Vec2 c = new Vec2(soldier.getCenterX(), soldier.getCenterY());
 			float r = (soldier.getWidth()/2) * (soldier.getWidth()/2);
 			
 			float underSquareRoot = checkLineIntersection(c, l, o, r);
 			underSquareRoot = (float) Math.sqrt(underSquareRoot);
 			if(underSquareRoot >= 0) {
-				float startPoint = -(l.dot(o.minus(c)));
-				float res1 = (startPoint + underSquareRoot);
-				float res2 = (startPoint - underSquareRoot);
-				if( res1 > 1 ||
-				   res2 > 1) {
+				if(hitInFrontOfOrigin(c, l, o, underSquareRoot)) {
 					soldier.healthPaint.setColor(Color.RED);//;takeDamage(damage);
-					System.out.println(soldier.getName() + " hit by laser");
-					
 				}
 				
 			}
@@ -88,6 +78,17 @@ public class LaserBullet extends AbstractBullet {
 		
 		float res = part1 - part2;
 		return res;
+	}
+	
+	private boolean hitInFrontOfOrigin(Vec2 c, Vec2 l, Vec2 o, float distance) {
+		float startPoint = -(l.dot(o.minus(c)));
+		float res1 = (startPoint + distance);
+		float res2 = (startPoint - distance);
+		if( res1 > 1 ||
+		   res2 > 1) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

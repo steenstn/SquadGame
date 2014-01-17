@@ -70,6 +70,8 @@ public class Enemy implements IRenderable, IEntity{
 	}
 	public float getX() { return x; }
 	public float getY() { return y; }
+	public float getCenterX() { return x+width/2; }
+	public float getCenterY() { return y+width/2; }
 	public int getWidth() { return width; }
 	public int getHealth() { return health; }
 	

@@ -69,6 +69,8 @@ public class Soldier implements IRenderable, IEntity{
 	public SoldierPortrait getPortrait() { return portrait; }
 	
 	public float getX() { return x; }
+	public float getCenterX() { return x+width/2; }
+	public float getCenterY() { return y+width/2; }
 	public float getY() { return y; }
 	public int getWidth() { return width; }
 	public AbstractWeapon getWeapon() { return weapon; }
