@@ -9,6 +9,7 @@ import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
 import squadgame.main.Model;
+import squadgame.main.Rectangle;
 import squadgame.pickups.AbstractPickup;
 import squadgame.weapons.AbstractWeapon;
 import squadgame.weapons.SingleBulletGun;
@@ -17,6 +18,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.widget.Toast;
 
 public class Soldier implements IRenderable, IEntity {
 
@@ -131,17 +133,24 @@ public class Soldier implements IRenderable, IEntity {
 	public void checkCollisions(Model model) {
 		for(Enemy enemy : model.enemies) {
 			if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
-				takeDamage(1);
+				takeDamage(0);
 		}
 		/*
-		List<Enemy> returnObjects = new ArrayList<Enemy>();
+		List<Rectangle> returnObjects = new ArrayList<Rectangle>();
 		for (int i = 0; i < model.enemies.size(); i++) {
 		  returnObjects.clear();
-		  model.quadTree.retrieve(returnObjects, this);
+		  Rectangle soldierDimensions = new Rectangle((int)x, (int)y, width, width);
+		  model.quadTree.retrieve(returnObjects, soldierDimensions);
 		 
+		  try {
 		  for (int x = 0; x < returnObjects.size(); x++) {
 			  if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, returnObjects.get(i).getX(), returnObjects.get(i).getY(), returnObjects.get(i).getWidth(), returnObjects.get(i).getWidth()))
-					takeDamage(1);
+					takeDamage(0);
+		  }
+		  }
+		  catch(IndexOutOfBoundsException e)
+		  {
+			  System.out.println("Out of bounds" + e);
 		  }
 		}*/
 	}
@@ -208,10 +217,11 @@ public class Soldier implements IRenderable, IEntity {
 	public void shoot(Model model)
 	{
 		weapon.reload();
+		float deltaX = targetEnemy.getX()+targetEnemy.getWidth()/2 - (x+width/2);
+		float deltaY = targetEnemy.getY()+targetEnemy.getWidth()/2 - (y+width/2);
+		bulletAngle = (float) (Math.atan2(deltaY, deltaX));
 		if(weapon.isReloaded() && weapon.hasAmmo()) {
-			float deltaX = targetEnemy.getX()+targetEnemy.getWidth()/2 - (x+width/2);
-			float deltaY = targetEnemy.getY()+targetEnemy.getWidth()/2 - (y+width/2);
-			bulletAngle = (float) (Math.atan2(deltaY, deltaX));
+			
 			
 			float bulletX = (float) (x+width/2 + 0.8*width*Math.cos(bulletAngle));
 			float bulletY = (float) (y+width/2 + 0.8*width*Math.sin(bulletAngle));

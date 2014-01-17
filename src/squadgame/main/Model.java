@@ -38,7 +38,7 @@ public class Model {
 	public int screenWidth;
 	public int screenHeight;
 	public int score = 0;
-	private Context context;
+	public Context context;
 	public Bitmap background;
 	
 	public QuadTree quadTree;
@@ -52,7 +52,7 @@ public class Model {
 	    display.getSize(size);
 	    screenWidth = size.x;
 	    screenHeight = size.y;
-	    quadTree = new QuadTree(0, new Rectangle(0, 0, screenWidth, screenHeight));
+	    quadTree = new QuadTree(0, new Rectangle(-500, -500, screenWidth+500, screenHeight+500));
 	    background = BitmapFactory.decodeResource(context.getResources(),R.drawable.background);
 	    
 	    
@@ -64,7 +64,7 @@ public class Model {
 	    soldier2.setWeapon(new SingleBulletGun("Machine gun", soldier2, 200, 10, 30));
 	    
 	    Soldier soldier3 = new Soldier("Berik", screenWidth-200,100,0,255,0);
-	    soldier3.setWeapon(new LaserGun("Laser", soldier3, 200, 80, 50));
+	    soldier3.setWeapon(new LaserGun("Laser", soldier3, 200, 30, 120));
 	    
 	    Soldier soldier4 = new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0);
 	    soldiers.add(soldier1);
@@ -142,7 +142,7 @@ public class Model {
     	
     	soldiers.get(3).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_yellow));  
     	renderables.add(soldiers.get(3));
-	 	   
+	 	
 	    
 	    for(SoldierPortrait portrait : portraits)
 	    {
