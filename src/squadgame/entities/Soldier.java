@@ -1,6 +1,7 @@
 package squadgame.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import squadgame.bullets.AbstractBullet;
 import squadgame.bullets.StandardBullet;
@@ -17,10 +18,12 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
-public class Soldier implements IRenderable, IEntity{
+public class Soldier implements IRenderable, IEntity {
 
 	public static final float originalMaxSpeed = 3;
-	private float x, y;
+	
+	private float x,y;
+	private boolean alive;
 	private float angle;
 	private float speed;
 	private int red,green,blue;
@@ -33,7 +36,6 @@ public class Soldier implements IRenderable, IEntity{
 	private float bulletAngle;
 	private int health;
 	private int maxHealth;
-	private boolean alive;
 	public ArrayList<AbstractPickup> pickups;
 	public Paint healthPaint = new Paint();
 	private Bitmap image;
@@ -99,8 +101,7 @@ public class Soldier implements IRenderable, IEntity{
 		this.portrait = portrait;
 	}
 	
-	public void targetClosestEnemy(ArrayList<Enemy> enemies)
-	{
+	public void targetClosestEnemy(ArrayList<Enemy> enemies) {
 		if(enemies.size() == 0)
 			return;
 		
@@ -108,8 +109,7 @@ public class Soldier implements IRenderable, IEntity{
 				enemies.get(0).getX(), enemies.get(0).getY());
 		int indexOfClosestEnemy = 0;
 		
-		for(int i = 1; i < enemies.size(); i++)
-		{
+		for(int i = 1; i < enemies.size(); i++)	{
 			float distance = Functions.getDistanceSquared(x, y, 
 					enemies.get(i).getX(), enemies.get(i).getY());
 			
@@ -122,24 +122,31 @@ public class Soldier implements IRenderable, IEntity{
 		targetEnemy = enemies.get(indexOfClosestEnemy);
 	}
 	
-	public void addAndActivatePickup(AbstractPickup pickup)
-	{
+	public void addAndActivatePickup(AbstractPickup pickup) {
 		pickups.add(pickup);
 		pickup.activatePickup(this);
 	}
 	
 	@Override
-	public void checkCollisions(Model model)
-	{
-		for(Enemy enemy : model.enemies)
-		{
+	public void checkCollisions(Model model) {
+		for(Enemy enemy : model.enemies) {
 			if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
 				takeDamage(1);
 		}
+		/*
+		List<Enemy> returnObjects = new ArrayList<Enemy>();
+		for (int i = 0; i < model.enemies.size(); i++) {
+		  returnObjects.clear();
+		  model.quadTree.retrieve(returnObjects, this);
+		 
+		  for (int x = 0; x < returnObjects.size(); x++) {
+			  if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, returnObjects.get(i).getX(), returnObjects.get(i).getY(), returnObjects.get(i).getWidth(), returnObjects.get(i).getWidth()))
+					takeDamage(1);
+		  }
+		}*/
 	}
 	
-	public void usePickups()
-	{
+	public void usePickups() {
 		if(pickups.size() <= 0)
 			return;
 		

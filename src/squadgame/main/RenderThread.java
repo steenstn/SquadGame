@@ -37,6 +37,7 @@ class RenderThread extends Thread {
 	      try {
 	        c = sh.lockCanvas(null);
 	        synchronized (sh) {
+	        	resetQuadTree();
 	        	updateSoldiers();
 	        	updatePickups();
 	        	updateEnemies();
@@ -60,6 +61,13 @@ class RenderThread extends Thread {
 	    }
 	  }
 	  
+	  private void resetQuadTree()
+	  {/*
+		  model.quadTree.clear();
+		  for (int i = 0; i < model.enemies.size(); i++) {
+			  model.quadTree.insert(model.enemies.get(i));
+		  }*/
+	  }
 	  private void updateSoldiers()
 	  {
 		  for(int i = 0; i < model.soldiers.size(); i++)

@@ -20,7 +20,7 @@ public class LaserBullet extends AbstractBullet {
 		super(x, y, angle, damage);
 		hitTargets = new ArrayList<IEntity>();
 		paint.setAntiAlias(true);
-		paint.setStrokeWidth(2.0f);
+		paint.setStrokeWidth(3.0f);
 	}
 
 	@Override
@@ -34,9 +34,8 @@ public class LaserBullet extends AbstractBullet {
 	{
 		Vec2 l = new Vec2((float) Math.cos(angle), (float) Math.sin(angle));
 		Vec2 o = new Vec2(x ,y);
-		
-		// (l * (o-c))^2 - l^2((o-c)^2-r^2)
-		// http://en.wikipedia.org/wiki/Line%E2%80%93sphere_intersection
+
+
 		if(!isActive())
 			return;
 		
@@ -61,7 +60,7 @@ public class LaserBullet extends AbstractBullet {
 			underSquareRoot = (float) Math.sqrt(underSquareRoot);
 			if(underSquareRoot >= 0) {
 				if(hitInFrontOfOrigin(c, l, o, underSquareRoot)) {
-					soldier.healthPaint.setColor(Color.RED);//;takeDamage(damage);
+					soldier.takeDamage(damage);
 				}
 				
 			}
@@ -95,7 +94,7 @@ public class LaserBullet extends AbstractBullet {
 	public void render(Canvas c) {
 		paint.setARGB(255,255,255,255);
 		//c.drawCircle(x+2, y+2, 4, paint);
-		c.drawLine(x, y, x + (float)(1000.0f*Math.cos(angle)), y + (float)(1000.0f*Math.sin(angle)), paint);
+		c.drawLine(x, y, x + (float)(10000.0f*Math.cos(angle)), y + (float)(10000.0f*Math.sin(angle)), paint);
 	}
 	
 	private class Vec2 {
@@ -109,11 +108,7 @@ public class LaserBullet extends AbstractBullet {
 		public Vec2 minus(Vec2 in) {
 			return new Vec2(x - in.x, y - in.y);
 		}
-		public Vec2 multiply(float in) {
-			x*=in;
-			y*=in;
-			return new Vec2(x,y);
-		}
+		
 		public float dot(Vec2 in) {
 			return in.x * x + in.y * y;
 		}

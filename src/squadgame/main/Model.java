@@ -20,6 +20,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.WindowManager;
+import android.graphics.Rect;
 
 public class Model {
 
@@ -39,6 +40,9 @@ public class Model {
 	public int score = 0;
 	private Context context;
 	public Bitmap background;
+	
+	public QuadTree quadTree;
+	
 	public Model(Context ctx)
 	{
 		this.context = ctx;
@@ -48,6 +52,7 @@ public class Model {
 	    display.getSize(size);
 	    screenWidth = size.x;
 	    screenHeight = size.y;
+	    quadTree = new QuadTree(0, new Rectangle(0, 0, screenWidth, screenHeight));
 	    background = BitmapFactory.decodeResource(context.getResources(),R.drawable.background);
 	    
 	    

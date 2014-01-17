@@ -8,7 +8,7 @@ import squadgame.main.Model;
  *
  */
 public interface IEntity {
-
+	
 	public void updatePosition(Model model);
 	public void checkCollisions(Model model);
 	public boolean isActive();
