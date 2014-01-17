@@ -2,13 +2,15 @@ package squadgame.main;
 
 import java.util.ArrayList;
 
-import squadgame.entities.Bullet;
+import squadgame.bullets.AbstractBullet;
+import squadgame.bullets.StandardBullet;
 import squadgame.entities.Enemy;
 import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
 import squadgame.factories.PickupFactory;
 import squadgame.interfaces.IRenderable;
 import squadgame.pickups.AbstractPickup;
+import squadgame.weapons.LaserGun;
 import squadgame.weapons.MultipleBulletsGun;
 import squadgame.weapons.SingleBulletGun;
 
@@ -28,7 +30,7 @@ public class Model {
 	public ArrayList<SoldierPortrait> portraits;
 	public ArrayList<Enemy> enemies;
 	public ArrayList<IRenderable> renderables;
-	public ArrayList<Bullet> bullets;
+	public ArrayList<AbstractBullet> bullets;
 	public ArrayList<AbstractPickup> pickups;
 	
 	private PickupFactory pickupFactory = new PickupFactory();
@@ -57,6 +59,8 @@ public class Model {
 	    soldier2.setWeapon(new SingleBulletGun("Machine gun", soldier2, 200, 10, 30));
 	    
 	    Soldier soldier3 = new Soldier("Berik", screenWidth-200,100,0,255,0);
+	    soldier3.setWeapon(new LaserGun("Laser", soldier3, 200, 8, 50));
+	    
 	    Soldier soldier4 = new Soldier("Mustaffan", screenWidth-200,screenHeight/2,255,255,0);
 	    soldiers.add(soldier1);
 	    soldiers.add(soldier2);
@@ -75,7 +79,7 @@ public class Model {
 	    enemies = new ArrayList<Enemy>();
 	    enemies.add(new Enemy(500,500));
 	    
-	    bullets = new ArrayList<Bullet>();
+	    bullets = new ArrayList<AbstractBullet>();
 	    pickups = new ArrayList<AbstractPickup>();
 	    addRenderables();
 	}

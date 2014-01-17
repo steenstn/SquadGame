@@ -1,27 +1,21 @@
-package squadgame.entities;
+package squadgame.bullets;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import squadgame.entities.Enemy;
+import squadgame.entities.Soldier;
 import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
 import squadgame.main.Model;
 
-public class Bullet implements IRenderable, IEntity{
+public class StandardBullet extends AbstractBullet {
 	
-	float x,y;
-	float angle;
-	boolean alive;
-	private int damage;
-	public Bullet(float x, float y, float angle, int damage)
-	{
-		this.x = x;
-		this.y = y;
-		this.angle = angle;
-		this.alive = true;
-		this.damage = damage;
+	
+	public StandardBullet(float x, float y, float angle, int damage) {
+		super(x, y, angle, damage);
 	}
-	
+
 	@Override
 	public void updatePosition(Model model)
 	{
@@ -37,11 +31,9 @@ public class Bullet implements IRenderable, IEntity{
 	@Override
 	public void checkCollisions(Model model)
 	{
-		for(Enemy enemy : model.enemies)
-		{
+		for(Enemy enemy : model.enemies) {
 			if(alive && Functions.rectsOverlap(x, y, 4, 4, 
-					enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
-			{
+					enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth())) {
 				this.alive = false;
 				enemy.takeDamage(damage);
 			}
@@ -56,11 +48,8 @@ public class Bullet implements IRenderable, IEntity{
 		
 	}
 	
-	public boolean isActive() { return alive; }
-	
 	@Override
 	public void render(Canvas c) {
-		Paint paint = new Paint();
 		paint.setARGB(255,255,255,255);
 		c.drawCircle(x+2, y+2, 4, paint);
 	}

@@ -2,7 +2,8 @@ package squadgame.weapons;
 
 import java.util.ArrayList;
 
-import squadgame.entities.Bullet;
+import squadgame.bullets.AbstractBullet;
+import squadgame.bullets.StandardBullet;
 import squadgame.entities.Soldier;
 
 public class MultipleBulletsGun extends AbstractWeapon {
@@ -12,13 +13,13 @@ public class MultipleBulletsGun extends AbstractWeapon {
 	}
 
 	@Override
-	public ArrayList<Bullet> shoot(float x, float y, float angle) {
+	public ArrayList<AbstractBullet> shoot(float x, float y, float angle) {
 		resetReloadCounter();
 		float spread = 0.2f;
-		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-		bullets.add(new Bullet(x, y, angle, damage));
-		bullets.add(new Bullet(x, y, (float) (angle+Math.random()*spread), damage));
-		bullets.add(new Bullet(x, y, (float) (angle-Math.random()*spread), damage));
+		ArrayList<AbstractBullet> bullets = new ArrayList<AbstractBullet>();
+		bullets.add(new StandardBullet(x, y, angle, damage));
+		bullets.add(new StandardBullet(x, y, (float) (angle+Math.random()*spread), damage));
+		bullets.add(new StandardBullet(x, y, (float) (angle-Math.random()*spread), damage));
 		return bullets;
 	}
 

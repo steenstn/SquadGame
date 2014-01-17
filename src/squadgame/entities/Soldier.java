@@ -2,6 +2,8 @@ package squadgame.entities;
 
 import java.util.ArrayList;
 
+import squadgame.bullets.AbstractBullet;
+import squadgame.bullets.StandardBullet;
 import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
@@ -198,14 +200,14 @@ public class Soldier implements IRenderable, IEntity{
 	{
 		weapon.reload();
 		if(weapon.isReloaded() && weapon.hasAmmo()) {
-			float deltaX = targetEnemy.getX()+targetEnemy.getWidth() - (x+width/2);
-			float deltaY = targetEnemy.getY()+targetEnemy.getWidth() - (y+width/2);
+			float deltaX = targetEnemy.getX()+targetEnemy.getWidth()/2 - (x+width/2);
+			float deltaY = targetEnemy.getY()+targetEnemy.getWidth()/2 - (y+width/2);
 			bulletAngle = (float) (Math.atan2(deltaY, deltaX));
 			
 			float bulletX = (float) (x+width/2 + 0.8*width*Math.cos(bulletAngle));
 			float bulletY = (float) (y+width/2 + 0.8*width*Math.sin(bulletAngle));
-			ArrayList<Bullet> bullets = weapon.shoot(bulletX, bulletY, bulletAngle);
-			for(Bullet bullet : bullets) {
+			ArrayList<AbstractBullet> bullets = weapon.shoot(bulletX, bulletY, bulletAngle);
+			for(AbstractBullet bullet : bullets) {
 				model.bullets.add(bullet);
 				model.renderables.add(bullet);
 			}

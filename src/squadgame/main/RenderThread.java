@@ -1,6 +1,7 @@
 package squadgame.main;
 
-import squadgame.entities.Bullet;
+import squadgame.bullets.AbstractBullet;
+import squadgame.bullets.StandardBullet;
 import squadgame.entities.Enemy;
 import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
@@ -132,21 +133,20 @@ class RenderThread extends Thread {
       	}
 	  }
 	  
-	  private void updateBullets()
-	  {
+	  private void updateBullets() {
 		  for(int i = 0; i < model.bullets.size(); i++)
-      	{
-      		Bullet bullet = model.bullets.get(i);
-      		if(bullet.isActive())
-      		{
-        		bullet.updatePosition(model);
-        		bullet.checkCollisions(model);
-      		}
-      		else
-      		{
-      			model.bullets.remove(i);
-      			model.renderables.remove(bullet);
-      		}
+      	  {
+				AbstractBullet bullet = model.bullets.get(i);
+	      		if(bullet.isActive())
+	      		{
+	        		bullet.updatePosition(model);
+	        		bullet.checkCollisions(model);
+	      		}
+	      		else
+	      		{
+	      			model.bullets.remove(i);
+	      			model.renderables.remove(bullet);
+	      		}
       	}
 	  }
 	  
