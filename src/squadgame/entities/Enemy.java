@@ -96,7 +96,7 @@ public class Enemy implements IRenderable, IEntity {
 	
 	@Override
 	public void render(Canvas c) {
-		c.drawCircle(x+width/2, y+width/2, width/2 	, paint);
+		//c.drawCircle(x+width/2, y+width/2, width/2 	, paint);
 		
 		matrix.setTranslate(x, y);
 	  	matrix.postRotate((float) (angle * 180f/Math.PI)+90,x+width/2,y+width/2);

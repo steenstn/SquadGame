@@ -20,7 +20,7 @@ public class HealthPickup extends AbstractPickup {
 	public void render(Canvas c) {
 		if(pickedUp)
 			return;
-		c.drawBitmap(image, x, y, paint);//
+		c.drawBitmap(image, x, y, paint);
 	}
 	@Override
 	public void activatePickup(Soldier soldier) {

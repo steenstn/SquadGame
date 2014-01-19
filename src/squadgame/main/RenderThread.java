@@ -174,7 +174,7 @@ class RenderThread extends Thread {
 	    }
 	    Paint textPaint = new Paint();
 	    textPaint.setAntiAlias(true);
-	    textPaint.setTextSize(Model.textScale*2);
+	    textPaint.setTextSize(Model.textScale*1.5f);
 	    textPaint.setColor(Color.WHITE);
 	    canvas.drawText("Score: " + model.score, 10, 50, textPaint);
 	    if(MainActivity.printDebug)
@@ -186,7 +186,7 @@ class RenderThread extends Thread {
 	    {
 	    	Paint gameOverPaint = new Paint();
 	    	gameOverPaint.setAntiAlias(true);
-	    	gameOverPaint.setTextSize(Model.textScale*100);
+	    	gameOverPaint.setTextSize(Model.textScale*10);
 	    	gameOverPaint.setColor(Color.WHITE);
 	    	canvas.drawText("GAME OVER", 10, model.screenHeight/2, gameOverPaint);
 	    }

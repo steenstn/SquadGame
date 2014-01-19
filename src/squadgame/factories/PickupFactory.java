@@ -16,9 +16,15 @@ public class PickupFactory extends AbstractFactory {
 
 	private boolean debug = false;
 	private int whichPickup = 4;
+	private int speedResource, healthResource, invincibilityResource, rapidFireResource;
 	
 	public PickupFactory(Context context, int screenWidth, int screenHeight) {
 		super(context, screenWidth, screenHeight);
+		healthResource = R.drawable.health_pickup;
+		speedResource = R.drawable.speed_pickup;
+		invincibilityResource = R.drawable.invincibility_pickup;
+		
+		rapidFireResource = R.drawable.rapid_fire_pickup;
 	}
 	
 	public AbstractPickup createRandomPickup(float x, float y)
@@ -28,19 +34,19 @@ public class PickupFactory extends AbstractFactory {
 			switch(whichPickup) {
 			case 1:
 				pickup = new RapidFirePickup(x,y);
-				setUpImage(pickup, R.drawable.health_pickup);
+				setUpImage(pickup, rapidFireResource);
 				return pickup;
 			case 2:
 				pickup = new SpeedPickup(x,y);
-				setUpImage(pickup, R.drawable.health_pickup);
+				setUpImage(pickup, speedResource);
 				return pickup;
 			case 3:
 				pickup = new HealthPickup(x,y);
-				setUpImage(pickup, R.drawable.health_pickup);
+				setUpImage(pickup, healthResource);
 				return pickup;
 			case 4:
 				pickup = new InvincibilityPickup(x,y);
-				setUpImage(pickup, R.drawable.health_pickup);
+				setUpImage(pickup, invincibilityResource);
 				return pickup;
 			}
 		}
@@ -60,22 +66,22 @@ public class PickupFactory extends AbstractFactory {
 		AbstractPickup pickup;
 		if(result > 0.9) {
 			pickup = new InvincibilityPickup(x,y);
-			setUpImage(pickup, R.drawable.health_pickup);
+			setUpImage(pickup, invincibilityResource);
 			return pickup;
 		}
 		else if(result > 0.8) {
 			pickup = new SpeedPickup(x,y);
-			setUpImage(pickup, R.drawable.health_pickup);
+			setUpImage(pickup, speedResource);
 			return pickup;
 		}
 		else if(result>0.5) {
 			pickup = new RapidFirePickup(x,y);
-			setUpImage(pickup, R.drawable.health_pickup);
+			setUpImage(pickup, rapidFireResource);
 			return pickup;
 		}
 		else {
 			pickup = new HealthPickup(x,y);
-			setUpImage(pickup, R.drawable.health_pickup);
+			setUpImage(pickup, healthResource);
 			return pickup;
 		}
 	}
