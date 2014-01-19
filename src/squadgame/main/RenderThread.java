@@ -186,7 +186,7 @@ class RenderThread extends Thread {
 	    {
 	    	Paint gameOverPaint = new Paint();
 	    	gameOverPaint.setAntiAlias(true);
-	    	gameOverPaint.setTextSize(200);
+	    	gameOverPaint.setTextSize(Model.textScale*100);
 	    	gameOverPaint.setColor(Color.WHITE);
 	    	canvas.drawText("GAME OVER", 10, model.screenHeight/2, gameOverPaint);
 	    }

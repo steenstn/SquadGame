@@ -35,7 +35,7 @@ public class Model {
 	public ArrayList<AbstractBullet> bullets;
 	public ArrayList<AbstractPickup> pickups;
 	public int collisionChecks = 0;
-	private PickupFactory pickupFactory = new PickupFactory();
+	private PickupFactory pickupFactory;
 	private EnemyFactory enemyFactory;
 	private SoldierFactory soldierFactory;
 	
@@ -60,6 +60,7 @@ public class Model {
 	    textScale = BitmapResizer.calculateScale(0.2f, 12, screenWidth);
 	    enemyFactory = new EnemyFactory(ctx, screenWidth,screenHeight);
 	    soldierFactory = new SoldierFactory(ctx, screenWidth,screenHeight);
+	    pickupFactory = new PickupFactory(ctx, screenWidth,screenHeight);
 	    
 	    quadTree = new QuadTree(0, new Rectangle(-500, -500, screenWidth+500, screenHeight+500));
 	    background = BitmapFactory.decodeResource(context.getResources(),R.drawable.background);
