@@ -1,3 +1,3 @@
 Friendly fire
 =============
-Shoot the greys, don't shoot each other.
+Shoot the enemies, don't shoot each other.

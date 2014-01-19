@@ -2,9 +2,8 @@ package squadgame.entities;
 
 import squadgame.interfaces.IRenderable;
 import squadgame.main.MainActivity;
-import squadgame.pickups.AbstractPickup;
+import squadgame.main.Model;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
 public class SoldierPortrait implements IRenderable{
@@ -51,7 +50,7 @@ public class SoldierPortrait implements IRenderable{
 	  	Paint textPaint = new Paint();
 	  	textPaint.setARGB(255, 255, 255, 255);
 	  	textPaint.setAntiAlias(true);
-	  	textPaint.setTextSize(20);
+	  	textPaint.setTextSize(Model.textScale);
 	  	
 	  	c.drawRect(x, y, x+width, y+height, paint);
 	  	c.drawText(soldier.getName(), x, y+20, textPaint);

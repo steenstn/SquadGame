@@ -30,6 +30,7 @@ public class Soldier implements IRenderable, IEntity {
 	private String name;
 	private AbstractWeapon weapon;
 	private int width = 64;
+	private float scale = 1;
 	private float targetX, targetY;
 	private Enemy targetEnemy;
 	private SoldierPortrait portrait;
@@ -79,6 +80,12 @@ public class Soldier implements IRenderable, IEntity {
 	public int red() { return red; }
 	public int green() { return green; }
 	public int blue() { return blue; }
+	public float getScale() { return scale; }
+
+	public void setScale(float scale) {
+		this.scale = scale;
+		this.width *= scale;
+	}
 	
 	public void setTarget(float x, float y)
 	{
@@ -129,12 +136,12 @@ public class Soldier implements IRenderable, IEntity {
 	
 	@Override
 	public void checkCollisions(Model model) {
-		/*for(Enemy enemy : model.enemies) {
+		for(Enemy enemy : model.enemies) {
 		  model.collisionChecks++;
 			if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getWidth()))
-				takeDamage(0);
+				takeDamage(1);
 		}
-		*/
+		/*
 		List<Rectangle> returnObjects = new ArrayList<Rectangle>();
 		for (Enemy enemy : model.enemies) {
 		  returnObjects.clear();
@@ -145,9 +152,9 @@ public class Soldier implements IRenderable, IEntity {
 			  model.collisionChecks++;
 			  if(Functions.rectsOverlap(x, y, width*0.8f, width*0.8f, 
 					  rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getWidth()))
-					takeDamage(0);
+					takeDamage(1);
 		  }
-		}
+		}*/
 	}
 	
 	public void usePickups() {
@@ -238,7 +245,7 @@ public class Soldier implements IRenderable, IEntity {
 	  	Paint textPaint = new Paint();
 	  	textPaint.setARGB(255, 255, 255, 255);
 	  	textPaint.setAntiAlias(true);
-	  	textPaint.setTextSize(20);
+	  	textPaint.setTextSize(Model.textScale);
 
 	  	c.drawCircle(targetX, targetY,5,paint);
 	  	

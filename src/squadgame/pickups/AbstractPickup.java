@@ -1,6 +1,5 @@
 package squadgame.pickups;
 
-import android.graphics.Canvas;
 import android.graphics.Paint;
 import squadgame.entities.Soldier;
 import squadgame.interfaces.IRenderable;

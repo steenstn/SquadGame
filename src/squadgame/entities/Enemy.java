@@ -19,8 +19,9 @@ public class Enemy implements IRenderable, IEntity {
 	private int health;
 	private int width, height;
 	private boolean alive;
-	private Bitmap image;
+	private static Bitmap image;
 	private Paint healthPaint = new Paint();
+	private float scale = 1;
 
 	Paint paint = new Paint();
 	private Matrix matrix;
@@ -31,7 +32,7 @@ public class Enemy implements IRenderable, IEntity {
 		this.y = y;
 		this.angle = this.targetAngle = (float) (Math.random()*2*Math.PI);
 		this.health = 100;
-		this.width = this.height = 64;
+		this.width = this.height = Math.round(64.0f * scale);
 		this.alive = true;
 		matrix = new Matrix();
 		healthPaint.setColor(Color.GREEN);
@@ -44,14 +45,19 @@ public class Enemy implements IRenderable, IEntity {
 	public float getCenterY() { return y+width/2; }
 	public float getY() { return y; }
 	public int getWidth() { return width; }
-	public void setImage(Bitmap image)
-	{
-		this.image = Bitmap.createBitmap(image);
+	public float getScale() { return scale; }
+	
+	public void setImage(Bitmap image) {
+		Enemy.image = Bitmap.createBitmap(image);
+	}
+	
+	public void setScale(float scale) {
+		this.scale = scale;
+		this.width *= scale;
 	}
 	
 	@Override
-	public void updatePosition(Model model)
-	{
+	public void updatePosition(Model model) {
 		if(Math.abs(angle-targetAngle) < 0.1) {
 			targetAngle = (float) (Math.random()*2*Math.PI);
 		}
@@ -90,7 +96,7 @@ public class Enemy implements IRenderable, IEntity {
 	
 	@Override
 	public void render(Canvas c) {
-	//	c.drawCircle(x+width/2, y+width/2, width, paint);
+		c.drawCircle(x+width/2, y+width/2, width/2 	, paint);
 		
 		matrix.setTranslate(x, y);
 	  	matrix.postRotate((float) (angle * 180f/Math.PI)+90,x+width/2,y+width/2);

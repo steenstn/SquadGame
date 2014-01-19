@@ -174,7 +174,7 @@ class RenderThread extends Thread {
 	    }
 	    Paint textPaint = new Paint();
 	    textPaint.setAntiAlias(true);
-	    textPaint.setTextSize(30);
+	    textPaint.setTextSize(Model.textScale*2);
 	    textPaint.setColor(Color.WHITE);
 	    canvas.drawText("Score: " + model.score, 10, 50, textPaint);
 	    if(MainActivity.printDebug)
