@@ -97,32 +97,30 @@ public class Model {
 	    pickups = new ArrayList<AbstractPickup>();
 	    addRenderables();
 
-	    spawnEnemy();
+	    for(int i = 0; i < 3; i++)
+	    	spawnEnemyOutsideScreen();
 	}
 	
-	public void spawnEnemy()
-	{
+	public void spawnEnemyOutsideScreen() {
+		int whichSide = (int) (Math.round(Math.random() * 3) + 1);
 		float newX = 0, newY = 0;
-		// Try and spawn away from the players
-		for(int i = 0; i < 20; i++)
-		{
-			boolean positionIsOk = true;
-			newX = (float)(Math.random()*screenWidth);
-			newY = (float)(Math.random()*screenHeight);
-			
-			for(Soldier soldier : soldiers)
-			{
-				if(Functions.rectsOverlap(newX, newY, 1, 1,
-						soldier.getX()-5*soldier.getWidth(), soldier.getY()-5*soldier.getWidth(), 5*soldier.getWidth(), 5*soldier.getWidth()))
-				{
-					positionIsOk = false;
-				}
-				
-			}
-			if(positionIsOk)
-			{
-				break;
-			}
+		
+		if(whichSide == 0) {
+			newX = 0;
+			newY = (float)(Math.random() * screenHeight);
+		}
+		else if(whichSide == 1) {
+			newX = screenWidth;
+			newY = (float)(Math.random() * screenHeight);
+		}
+		else if(whichSide == 2) {
+			newX = (float)(Math.random() * screenWidth);
+			newY = 0;
+		}
+		else if(whichSide == 3) {
+			 newX = (float)(Math.random() * screenWidth);
+			 newY = screenHeight;
+			 
 		}
     	Enemy enemy = enemyFactory.createEnemy(newX, newY);
     	enemies.add(enemy);

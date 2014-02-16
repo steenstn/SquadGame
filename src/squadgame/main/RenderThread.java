@@ -1,12 +1,10 @@
 package squadgame.main;
 
 import squadgame.bullets.AbstractBullet;
-import squadgame.bullets.StandardBullet;
 import squadgame.entities.Enemy;
 import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
 import squadgame.pickups.AbstractPickup;
-import squadgame.pickups.HealthPickup;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -139,9 +137,9 @@ class RenderThread extends Thread {
       			{
       				model.score += 100;
       			}
-      			model.spawnEnemy();
+      			model.spawnEnemyOutsideScreen();
       			if(Math.random()>0.6)
-      				model.spawnEnemy();
+      				model.spawnEnemyOutsideScreen();
       		}
       	}
 	  }
