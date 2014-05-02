@@ -3,7 +3,6 @@ package squadgame.weapons;
 import java.util.ArrayList;
 
 import squadgame.bullets.AbstractBullet;
-import squadgame.bullets.StandardBullet;
 import squadgame.entities.Soldier;
 
 public abstract class AbstractWeapon {

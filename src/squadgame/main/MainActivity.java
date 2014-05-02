@@ -1,6 +1,5 @@
 package squadgame.main;
 
-import squadgame.entities.Enemy;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

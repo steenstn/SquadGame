@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import squadgame.bullets.AbstractBullet;
 import squadgame.bullets.LaserBullet;
-import squadgame.bullets.StandardBullet;
 import squadgame.entities.Soldier;
 
 public class LaserGun extends AbstractWeapon {
