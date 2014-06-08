@@ -86,10 +86,10 @@ public class Enemy
 
         x += 0.5 * Math.cos(angle);
         y += 0.5 * Math.sin(angle);
-
-        if (x > model.screenWidth + width || x < -width || y > model.screenHeight + width || y < -width) {
-            this.alive = false;
-        }
+        /*
+                if (x > model.screenWidth + width || x < -width || y > model.screenHeight + width || y < -width) {
+                    this.alive = false;
+                }*/
 
     }
 

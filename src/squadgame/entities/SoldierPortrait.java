@@ -74,11 +74,12 @@ public class SoldierPortrait
             Paint tempPaint = new Paint();
             tempPaint.setARGB(150, 0, 255, 0);
             for (int i = 0; i < soldier.pickups.size(); i++) {
-                c.drawRect(soldier.getX(), 20 + soldier.getY() + 20 * i, soldier.getX()
-                        + soldier.pickups.get(i).getEffectTime() / 2, -20 + soldier.getY() + 20 * i + 20, tempPaint);
+                c.drawRect(soldier.getX() + screenX, 20 + soldier.getY() + screenY + 20 * i, soldier.getX() + screenX
+                        + soldier.pickups.get(i).getEffectTime() / 2, -20 + soldier.getY() + screenY + 20 * i + 20,
+                    tempPaint);
 
-                c.drawText(soldier.pickups.get(i).getClass().getSimpleName(), soldier.getX(), 20 + soldier.getY() + 20
-                        * i, textPaint);
+                c.drawText(soldier.pickups.get(i).getClass().getSimpleName(), soldier.getX() + screenX,
+                    20 + soldier.getY() + screenY + 20 * i, textPaint);
             }
         }
         c.drawText(soldier.getWeapon().getName(), x, y + height, textPaint);

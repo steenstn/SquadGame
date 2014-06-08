@@ -164,6 +164,7 @@ class RenderThread
         if (MainActivity.printDebug) {
             canvas.drawText("Enemies: " + model.enemies.size(), 10, 80, textPaint);
             canvas.drawText("Collision checks: " + model.collisionChecks, 10, 110, textPaint);
+            canvas.drawText("Bullets: " + model.bullets.size(), 10, 130, textPaint);
         }
         if (model.soldiers.size() == 0) {
             Paint gameOverPaint = new Paint();

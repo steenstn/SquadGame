@@ -108,17 +108,17 @@ public class Model {
         float newX = 0, newY = 0;
 
         if (whichSide == 0) {
-            newX = 0;
-            newY = (float) (Math.random() * screenHeight);
+            newX = 0 - MainView.screenX;
+            newY = (float) (Math.random() * screenHeight) - MainView.screenY;
         } else if (whichSide == 1) {
-            newX = screenWidth;
-            newY = (float) (Math.random() * screenHeight);
+            newX = screenWidth - MainView.screenX;
+            newY = (float) (Math.random() * screenHeight) - MainView.screenY;
         } else if (whichSide == 2) {
-            newX = (float) (Math.random() * screenWidth);
-            newY = 0;
+            newX = (float) (Math.random() * screenWidth) - MainView.screenX;
+            newY = 0 - MainView.screenY;
         } else if (whichSide == 3) {
-            newX = (float) (Math.random() * screenWidth);
-            newY = screenHeight;
+            newX = (float) (Math.random() * screenWidth) - MainView.screenX;
+            newY = screenHeight - MainView.screenY;
 
         }
         Enemy enemy = enemyFactory.createEnemy(newX, newY);

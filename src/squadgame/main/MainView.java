@@ -173,8 +173,8 @@ public class MainView
             for (Soldier soldier : model.soldiers) {
                 // If a soldier is clicked on, select only that soldier
                 if (Functions.rectsOverlap(event.getX() - screenX, event.getY() - screenY, 1, 1, soldier.getX()
-                        - soldier.getWidth(), soldier.getY() - soldier.getWidth(), 3 * soldier.getWidth(),
-                    3 * soldier.getWidth())) {
+                        - soldier.getWidth(), soldier.getY() - soldier.getWidth(), 2.6f * soldier.getWidth(),
+                    2.6f * soldier.getWidth())) {
 
                     for (SoldierPortrait portrait : model.portraits) {
                         portrait.setSelected(false);

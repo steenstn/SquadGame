@@ -15,12 +15,17 @@ public class StandardBullet
 
     @Override
     public void updatePosition(Model model) {
+
         x += 7 * Math.cos(angle);
         y += 7 * Math.sin(angle);
 
-        if (x > model.screenWidth || x < 0 || y > model.screenHeight || y < 0) {
+        if (lifeTime-- <= 0) {
             this.alive = false;
         }
+        /*
+        if (x > model.screenWidth || x < 0 || y > model.screenHeight || y < 0) {
+            this.alive = false;
+        }*/
     }
 
     @Override
