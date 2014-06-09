@@ -9,7 +9,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.view.SurfaceHolder;
 
@@ -151,27 +150,37 @@ class RenderThread
         //canvas.drawColor(Color.BLACK);
         Paint paint = new Paint();
         canvas.drawRect(0, 0, model.screenWidth, model.screenHeight, paint);
-        canvas.drawBitmap(model.background, null, new Rect((int) (MainView.screenX), (int) MainView.screenY,
-            (int) (MainView.screenX + model.screenWidth), (int) (MainView.screenY + model.screenHeight)), paint);
-        for (int i = 0; i < model.renderables.size(); i++) {
-            model.renderables.get(i).render(canvas, MainView.screenX, MainView.screenY);
-        }
+        drawBackground(canvas, paint);
+        drawRenderables(canvas, paint);
+
         Paint textPaint = new Paint();
         textPaint.setAntiAlias(true);
         textPaint.setTextSize(Model.textScale * 1.5f);
         textPaint.setColor(Color.WHITE);
         canvas.drawText("Score: " + model.score, 10, 50, textPaint);
+
         if (MainActivity.printDebug) {
             canvas.drawText("Enemies: " + model.enemies.size(), 10, 80, textPaint);
             canvas.drawText("Collision checks: " + model.collisionChecks, 10, 110, textPaint);
             canvas.drawText("Bullets: " + model.bullets.size(), 10, 130, textPaint);
         }
+
         if (model.soldiers.size() == 0) {
             Paint gameOverPaint = new Paint();
             gameOverPaint.setAntiAlias(true);
             gameOverPaint.setTextSize(Model.textScale * 10);
             gameOverPaint.setColor(Color.WHITE);
             canvas.drawText("GAME OVER", 10, model.screenHeight / 2, gameOverPaint);
+        }
+    }
+
+    private void drawBackground(Canvas canvas, Paint paint) {
+        model.getLevel().render(canvas, MainView.screenX, MainView.screenY);
+    }
+
+    private void drawRenderables(Canvas canvas, Paint paint) {
+        for (int i = 0; i < model.renderables.size(); i++) {
+            model.renderables.get(i).render(canvas, MainView.screenX, MainView.screenY);
         }
     }
 }

@@ -10,6 +10,8 @@ import squadgame.factories.EnemyFactory;
 import squadgame.factories.PickupFactory;
 import squadgame.factories.SoldierFactory;
 import squadgame.interfaces.IRenderable;
+import squadgame.levels.Level;
+import squadgame.levels.LevelReader;
 import squadgame.pickups.AbstractPickup;
 import squadgame.weapons.LaserGun;
 import squadgame.weapons.MultipleBulletsGun;
@@ -37,6 +39,8 @@ public class Model {
     private PickupFactory pickupFactory;
     private EnemyFactory enemyFactory;
     private SoldierFactory soldierFactory;
+    public Bitmap backgroundTileset;
+    private Level level;
 
     public int screenWidth;
     public int screenHeight;
@@ -49,6 +53,12 @@ public class Model {
 
     public Model(Context ctx) {
         this.context = ctx;
+
+        LevelReader lr = new LevelReader(ctx);
+        backgroundTileset = BitmapFactory.decodeResource(context.getResources(), R.drawable.tiles);
+
+        level = new Level(backgroundTileset);
+        lr.readLevelFromFile(level, R.raw.level1);
         WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
@@ -62,6 +72,7 @@ public class Model {
 
         quadTree = new QuadTree(0, new Rectangle(-500, -500, screenWidth + 500, screenHeight + 500));
         background = BitmapFactory.decodeResource(context.getResources(), R.drawable.background);
+
         imageScale.inScaled = false;
 
         soldiers = new ArrayList<Soldier>();
@@ -133,28 +144,18 @@ public class Model {
     }
 
     private void addRenderables() {
-
-        // Set the images for all the soldiers
         renderables = new ArrayList<IRenderable>();
-        //soldiers.get(0).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_red));  
         renderables.add(soldiers.get(0));
-
-        //soldiers.get(1).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_blue));  
         renderables.add(soldiers.get(1));
-
-        //soldiers.get(2).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_green));  
         renderables.add(soldiers.get(2));
-
-        //soldiers.get(3).setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.soldier_yellow));  
         renderables.add(soldiers.get(3));
 
         for (SoldierPortrait portrait : portraits) {
             renderables.add(portrait);
         }
-        /* for(Enemy enemy:enemies)
-         {
-         	enemy.setImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.enemy));
-         	renderables.add(enemy);
-         }*/
+    }
+
+    public Level getLevel() {
+        return level;
     }
 }
