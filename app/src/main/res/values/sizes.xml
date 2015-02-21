@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Size of images in percent of screen width -->
+    <item name="enemy_image_width" format="float" type="dimen">0.05</item>
+    <item name="soldier_image_width" format="float" type="dimen">0.05</item>
+    <item name="pickup_image_width" format="float" type="dimen">0.025</item>
+    
+    
+</resources>

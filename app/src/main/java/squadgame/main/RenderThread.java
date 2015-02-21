@@ -1,9 +1,11 @@
 package squadgame.main;
 
 import squadgame.bullets.AbstractBullet;
-import squadgame.entities.Enemy;
+import squadgame.entities.enemies.AbstractEnemy;
 import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
+import squadgame.entities.enemies.Runner;
+import squadgame.entities.enemies.Zombie;
 import squadgame.pickups.AbstractPickup;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -65,7 +67,7 @@ class RenderThread
 
     private void resetQuadTree() {
         model.quadTree.clear();
-        for (Enemy enemy : model.enemies) {
+        for (AbstractEnemy enemy : model.enemies) {
             if (enemy.isActive()) {
                 Rectangle enemyDimensions = new Rectangle((int) enemy.getX(), (int) enemy.getY(), enemy.getWidth(),
                     enemy.getWidth());
@@ -110,7 +112,7 @@ class RenderThread
 
     private void updateEnemies() {
         for (int i = 0; i < model.enemies.size(); i++) {
-            Enemy enemy = model.enemies.get(i);
+            AbstractEnemy enemy = model.enemies.get(i);
             if (enemy.isActive()) {
                 enemy.updatePosition(model);
             } else {
@@ -123,11 +125,11 @@ class RenderThread
                 model.renderables.remove(enemy);
 
                 if (enemy.getHealth() <= 0) {
-                    model.score += 100;
+                    model.increaseScore(10);
                 }
-                model.spawnEnemyOutsideScreen();
-                if (Math.random() > 0.6) {
-                    model.spawnEnemyOutsideScreen();
+                model.spawnEnemyOutsideScreen(Zombie.class);
+                if (Math.random() > 0.8) {
+                    model.spawnEnemyOutsideScreen(Runner.class);
                 }
             }
         }
@@ -157,7 +159,7 @@ class RenderThread
         textPaint.setAntiAlias(true);
         textPaint.setTextSize(Model.textScale * 1.5f);
         textPaint.setColor(Color.WHITE);
-        canvas.drawText("Score: " + model.score, 10, 50, textPaint);
+        canvas.drawText("Score: " + model.getScore(), model.screenWidth/2, model.screenHeight-30, textPaint);
 
         if (MainActivity.printDebug) {
             canvas.drawText("Enemies: " + model.enemies.size(), 10, 80, textPaint);

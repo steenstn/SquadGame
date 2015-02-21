@@ -23,7 +23,7 @@ public class MainView
     implements SurfaceHolder.Callback, OnTouchListener {
 
     private static final int INVALID_POINTER_ID = -1;
-    // The ‘active pointer’ is the one currently moving our object.
+    // The ï¿½active pointerï¿½ is the one currently moving our object.
     private int mActivePointerId = INVALID_POINTER_ID;
 
     int pointerIndex = INVALID_POINTER_ID;
@@ -229,6 +229,12 @@ public class MainView
             soldiers.get(3).setTarget(x, y + offset);
             break;
         }
+        accelerateSoldiers(soldiers);
     }
 
+    private void accelerateSoldiers(ArrayList<Soldier> soldiers) {
+        for(Soldier s : soldiers) {
+            s.increaseSpeed();
+        }
+    }
 }

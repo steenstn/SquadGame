@@ -1,0 +1,169 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* .idea\
+* .idea\.name
+* .idea\compiler.xml
+* .idea\copyright\
+* .idea\copyright\profiles_settings.xml
+* .idea\encodings.xml
+* .idea\misc.xml
+* .idea\modules.xml
+* .idea\scopes\
+* .idea\scopes\scope_settings.xml
+* .idea\vcs.xml
+* .idea\workspace.xml
+* README.md
+* app\
+* app\build.gradle
+* app\src\
+* app\src\main\
+* app\src\main\AndroidManifest.xml
+* app\src\main\java\
+* app\src\main\java\squadgame\
+* app\src\main\java\squadgame\bullets\
+* app\src\main\java\squadgame\bullets\AbstractBullet.java
+* app\src\main\java\squadgame\bullets\LaserBullet.java
+* app\src\main\java\squadgame\bullets\StandardBullet.java
+* app\src\main\java\squadgame\entities\
+* app\src\main\java\squadgame\entities\Enemy.java
+* app\src\main\java\squadgame\entities\Soldier.java
+* app\src\main\java\squadgame\entities\SoldierPortrait.java
+* app\src\main\java\squadgame\factories\
+* app\src\main\java\squadgame\factories\AbstractFactory.java
+* app\src\main\java\squadgame\factories\EnemyFactory.java
+* app\src\main\java\squadgame\factories\PickupFactory.java
+* app\src\main\java\squadgame\factories\SoldierFactory.java
+* app\src\main\java\squadgame\interfaces\
+* app\src\main\java\squadgame\interfaces\IEntity.java
+* app\src\main\java\squadgame\interfaces\IRenderable.java
+* app\src\main\java\squadgame\levels\
+* app\src\main\java\squadgame\levels\Level.java
+* app\src\main\java\squadgame\levels\LevelReader.java
+* app\src\main\java\squadgame\levels\Tile.java
+* app\src\main\java\squadgame\main\
+* app\src\main\java\squadgame\main\BitmapResizer.java
+* app\src\main\java\squadgame\main\Functions.java
+* app\src\main\java\squadgame\main\MainActivity.java
+* app\src\main\java\squadgame\main\MainView.java
+* app\src\main\java\squadgame\main\Model.java
+* app\src\main\java\squadgame\main\QuadTree.java
+* app\src\main\java\squadgame\main\Rectangle.java
+* app\src\main\java\squadgame\main\RenderThread.java
+* app\src\main\java\squadgame\pickups\
+* app\src\main\java\squadgame\pickups\AbstractPickup.java
+* app\src\main\java\squadgame\pickups\HealthPickup.java
+* app\src\main\java\squadgame\pickups\InvincibilityPickup.java
+* app\src\main\java\squadgame\pickups\RapidFirePickup.java
+* app\src\main\java\squadgame\pickups\SpeedPickup.java
+* app\src\main\java\squadgame\weapons\
+* app\src\main\java\squadgame\weapons\AbstractWeapon.java
+* app\src\main\java\squadgame\weapons\LaserGun.java
+* app\src\main\java\squadgame\weapons\MultipleBulletsGun.java
+* app\src\main\java\squadgame\weapons\SingleBulletGun.java
+* app\src\main\res\
+* app\src\main\res\drawable-hdpi\
+* app\src\main\res\drawable-hdpi\background.png
+* app\src\main\res\drawable-hdpi\ic_launcsher.png
+* app\src\main\res\drawable-hdpi\soldier_blue.png
+* app\src\main\res\drawable-hdpi\soldier_green.png
+* app\src\main\res\drawable-hdpi\soldier_red.png
+* app\src\main\res\drawable-hdpi\soldier_yellow.png
+* app\src\main\res\drawable-hdpi\tiles.png
+* app\src\main\res\drawable-ldpi\
+* app\src\main\res\drawable-ldpi\ic_launcher.png
+* app\src\main\res\drawable-ldpi\soldier_blue.png
+* app\src\main\res\drawable-ldpi\soldier_green.png
+* app\src\main\res\drawable-ldpi\soldier_red.png
+* app\src\main\res\drawable-ldpi\soldier_yellow.png
+* app\src\main\res\drawable-ldpi\tiles.png
+* app\src\main\res\drawable-mdpi\
+* app\src\main\res\drawable-mdpi\ic_launcher.png
+* app\src\main\res\drawable-mdpi\soldier_blue.png
+* app\src\main\res\drawable-mdpi\soldier_green.png
+* app\src\main\res\drawable-mdpi\soldier_red.png
+* app\src\main\res\drawable-mdpi\soldier_yellow.png
+* app\src\main\res\drawable-mdpi\tiles.png
+* app\src\main\res\drawable-xhdpi\
+* app\src\main\res\drawable-xhdpi\ic_launcher.png
+* app\src\main\res\drawable-xhdpi\ic_launcher_backup.png
+* app\src\main\res\drawable-xhdpi\soldier_blue.png
+* app\src\main\res\drawable-xhdpi\soldier_green.png
+* app\src\main\res\drawable-xhdpi\soldier_red.png
+* app\src\main\res\drawable-xhdpi\soldier_yellow.png
+* app\src\main\res\drawable-xhdpi\tiles.png
+* app\src\main\res\drawable\
+* app\src\main\res\drawable\enemy.png
+* app\src\main\res\drawable\health_pickup.png
+* app\src\main\res\drawable\invincibility_pickup.png
+* app\src\main\res\drawable\rapid_fire_pickup.png
+* app\src\main\res\drawable\speed_pickup.png
+* app\src\main\res\drawable\tiles.png
+* app\src\main\res\layout\
+* app\src\main\res\layout\activity_main.xml
+* app\src\main\res\menu\
+* app\src\main\res\menu\activity_main.xml
+* app\src\main\res\raw\
+* app\src\main\res\raw\level1.txt
+* app\src\main\res\values-v11\
+* app\src\main\res\values-v11\styles.xml
+* app\src\main\res\values-v14\
+* app\src\main\res\values-v14\styles.xml
+* app\src\main\res\values\
+* app\src\main\res\values\sizes.xml
+* app\src\main\res\values\strings.xml
+* app\src\main\res\values\styles.xml
+* build.gradle
+* gradle\
+* gradle\wrapper\
+* gradle\wrapper\gradle-wrapper.jar
+* gradle\wrapper\gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* ic_launcher-web.png
+* proguard-project.txt
+* settings.gradle
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:18.0.0
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* assets\ => app\src\main\assets\
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
