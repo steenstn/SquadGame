@@ -1,28 +1,18 @@
-package squadgame.pickups;
+package squadgame.pickups.soldier;
 
 import squadgame.entities.Soldier;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
 public class SpeedPickup
-    extends AbstractPickup {
+    extends AbstractSoldierPickup {
 
     private float powerUpSpeed = Soldier.originalMaxSpeed * 1.5f;
 
     public SpeedPickup(float x, float y) {
-        super(x, y);
-        this.effectTime = 250;
-        this.pickupTime = 550;
-        this.scoreForPickup = 2;
-        this.paint.setColor(Color.RED);
+        super(x, y, 550, 250, 2);
     }
 
-    @Override
-    public void render(Canvas c, float screenX, float screenY) {
-        if (pickedUp)
-            return;
-        c.drawBitmap(image, x + screenX, y + screenY, paint);
-    }
 
     @Override
     public void activatePickup(Soldier soldier) {

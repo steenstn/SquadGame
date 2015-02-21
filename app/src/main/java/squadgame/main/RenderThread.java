@@ -6,7 +6,8 @@ import squadgame.entities.Soldier;
 import squadgame.entities.SoldierPortrait;
 import squadgame.entities.enemies.Runner;
 import squadgame.entities.enemies.Zombie;
-import squadgame.pickups.AbstractPickup;
+import squadgame.pickups.soldier.AbstractSoldierPickup;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -98,7 +99,7 @@ class RenderThread
 
     private void updatePickups() {
         for (int i = 0; i < model.pickups.size(); i++) {
-            AbstractPickup pickup = model.pickups.get(i);
+            AbstractSoldierPickup pickup = model.pickups.get(i);
             pickup.countDownTimer();
             if (pickup.isActive()) {
                 pickup.checkCollisions(model);
@@ -159,7 +160,11 @@ class RenderThread
         textPaint.setAntiAlias(true);
         textPaint.setTextSize(Model.textScale * 1.5f);
         textPaint.setColor(Color.WHITE);
-        canvas.drawText("Score: " + model.getScore(), model.screenWidth/2, model.screenHeight-30, textPaint);
+        Paint scorePaint = new Paint();
+        scorePaint.setAntiAlias(true);
+        scorePaint.setTextSize(Model.textScale * 2.5f);
+        scorePaint.setColor(Color.WHITE);
+        canvas.drawText("Score: " + model.getScore(), 2, 50, scorePaint);
 
         if (MainActivity.printDebug) {
             canvas.drawText("Enemies: " + model.enemies.size(), 10, 80, textPaint);

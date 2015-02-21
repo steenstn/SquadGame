@@ -1,27 +1,16 @@
-package squadgame.pickups;
+package squadgame.pickups.soldier;
 
 import squadgame.entities.Soldier;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
 public class RapidFirePickup
-    extends AbstractPickup {
+    extends AbstractSoldierPickup {
 
     int newReloadTime;
 
     public RapidFirePickup(float x, float y) {
-        super(x, y);
-        this.effectTime = 200;
-        this.pickupTime = 500;
-        this.scoreForPickup = 2;
-        this.paint.setColor(Color.YELLOW);
-    }
-
-    @Override
-    public void render(Canvas c, float screenX, float screenY) {
-        if (pickedUp)
-            return;
-        c.drawBitmap(image, x + screenX, y + screenY, paint);
+        super(x, y, 500, 200, 2);
     }
 
     @Override

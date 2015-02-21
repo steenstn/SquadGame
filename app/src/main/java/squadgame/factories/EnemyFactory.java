@@ -19,7 +19,7 @@ public class EnemyFactory extends AbstractFactory {
 	}
 	
 	public Zombie spawnZombie(float x, float y) {
-		Zombie zombie = new Zombie(x,y);
+		Zombie zombie = new Zombie(x,y, (float)Math.random()*screenWidth,(float) Math.random()*screenHeight);
 
 		float wantedSize = Float.parseFloat(context.getResources().getString(R.dimen.enemy_image_width));
 		

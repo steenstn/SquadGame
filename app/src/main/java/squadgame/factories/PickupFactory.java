@@ -5,11 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import squadgame.main.BitmapResizer;
 import squadgame.main.R;
-import squadgame.pickups.AbstractPickup;
-import squadgame.pickups.HealthPickup;
-import squadgame.pickups.InvincibilityPickup;
-import squadgame.pickups.RapidFirePickup;
-import squadgame.pickups.SpeedPickup;
+import squadgame.pickups.soldier.AbstractSoldierPickup;
+import squadgame.pickups.soldier.HealthPickup;
+import squadgame.pickups.soldier.InvincibilityPickup;
+import squadgame.pickups.soldier.RapidFirePickup;
+import squadgame.pickups.soldier.SpeedPickup;
 
 public class PickupFactory extends AbstractFactory {
 
@@ -27,10 +27,10 @@ public class PickupFactory extends AbstractFactory {
 		rapidFireResource = R.drawable.rapid_fire_pickup;
 	}
 	
-	public AbstractPickup createRandomPickup(float x, float y)
+	public AbstractSoldierPickup createRandomPickup(float x, float y)
 	{
 		if(debug) {
-			AbstractPickup pickup;
+			AbstractSoldierPickup pickup;
 			switch(whichPickup) {
 			case 1:
 				pickup = new RapidFirePickup(x,y);
@@ -63,7 +63,7 @@ public class PickupFactory extends AbstractFactory {
 		 * 
 		 *  
 		 */
-		AbstractPickup pickup;
+		AbstractSoldierPickup pickup;
 		if(result > 0.9) {
 			pickup = new InvincibilityPickup(x,y);
 			setUpImage(pickup, invincibilityResource);
@@ -86,7 +86,7 @@ public class PickupFactory extends AbstractFactory {
 		}
 	}
 	
-	private void setUpImage(AbstractPickup pickup, int imageId) {
+	private void setUpImage(AbstractSoldierPickup pickup, int imageId) {
 
 		float wantedSize = Float.parseFloat(context.getResources().getString(R.dimen.pickup_image_width));
 		

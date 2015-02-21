@@ -1,27 +1,16 @@
-package squadgame.pickups;
+package squadgame.pickups.soldier;
 
 import squadgame.entities.Soldier;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
 public class HealthPickup
-    extends AbstractPickup {
+    extends AbstractSoldierPickup {
 
     public HealthPickup(float x, float y) {
-        super(x, y);
-        this.effectTime = 15;
-        this.pickupTime = 500;
-        this.scoreForPickup = 1;
-        this.paint.setColor(Color.GREEN);
+        super(x, y, 500, 15, 1);
     }
 
-    @Override
-    public void render(Canvas c, float screenX, float screenY) {
-        if (pickedUp) {
-            return;
-        }
-        c.drawBitmap(image, x + screenX, y + screenY, paint);
-    }
 
     @Override
     public void activatePickup(Soldier soldier) {

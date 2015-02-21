@@ -8,7 +8,7 @@ import squadgame.interfaces.IEntity;
 import squadgame.interfaces.IRenderable;
 import squadgame.main.Functions;
 import squadgame.main.Model;
-import squadgame.pickups.AbstractPickup;
+import squadgame.pickups.soldier.AbstractSoldierPickup;
 import squadgame.weapons.AbstractWeapon;
 import squadgame.weapons.SingleBulletGun;
 import android.graphics.Bitmap;
@@ -38,7 +38,7 @@ public class Soldier
     private float bulletAngle;
     private int health;
     private int maxHealth;
-    public ArrayList<AbstractPickup> pickups;
+    public ArrayList<AbstractSoldierPickup> pickups;
     public Paint healthPaint = new Paint();
     private Bitmap image;
     private Matrix matrix;
@@ -64,7 +64,7 @@ public class Soldier
 
         this.matrix = new Matrix();
 
-        pickups = new ArrayList<AbstractPickup>();
+        pickups = new ArrayList<AbstractSoldierPickup>();
 
     }
 
@@ -160,7 +160,7 @@ public class Soldier
         targetEnemy = enemies.get(indexOfClosestEnemy);
     }
 
-    public void addAndActivatePickup(AbstractPickup pickup) {
+    public void addAndActivatePickup(AbstractSoldierPickup pickup) {
         pickups.add(pickup);
         pickup.activatePickup(this);
     }

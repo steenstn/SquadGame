@@ -16,6 +16,10 @@ public class Runner extends AbstractEnemy {
     public void updatePosition(Model model) {
         x += movementSpeed * Math.cos(angle);
         y += movementSpeed * Math.sin(angle);
+
+        if (x > model.screenWidth + width || x < -width || y > model.screenHeight + width || y < -width) {
+            this.alive = false;
+        }
     }
 
 

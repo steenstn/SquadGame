@@ -1,28 +1,18 @@
-package squadgame.pickups;
+package squadgame.pickups.soldier;
 
 import squadgame.entities.Soldier;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
 public class InvincibilityPickup
-    extends AbstractPickup {
+    extends AbstractSoldierPickup {
 
     int health;
 
     public InvincibilityPickup(float x, float y) {
-        super(x, y);
-        this.effectTime = 350;
-        this.pickupTime = 500;
-        this.scoreForPickup = 2;
-        this.paint.setColor(Color.CYAN);
+        super(x, y, 500, 350, 2);
     }
 
-    @Override
-    public void render(Canvas c, float screenX, float screenY) {
-        if (pickedUp)
-            return;
-        c.drawBitmap(image, x + screenX, y + screenY, paint);
-    }
 
     @Override
     public void activatePickup(Soldier soldier) {
