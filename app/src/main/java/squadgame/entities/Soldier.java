@@ -52,7 +52,7 @@ public class Soldier
         this.targetY = y;
 
         healthPaint.setColor(Color.GREEN);
-        this.weapon = new SingleBulletGun("Pistol", this, 100, 20, 80);
+        this.weapon = new SingleBulletGun("Pistol", 100, 20, 80);
 
         this.red = r;
         this.green = g;

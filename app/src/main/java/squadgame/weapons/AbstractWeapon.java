@@ -9,7 +9,6 @@ public abstract class AbstractWeapon {
 
 	protected int defaultReloadTime;
 	private String name;
-	protected Soldier soldier;
 	protected int ammo;
 	protected int damage;
 	private int reloadTime;
@@ -19,14 +18,12 @@ public abstract class AbstractWeapon {
 	/**
 	 * Constructor for the weapon
 	 * @param name - Name of weapon
-	 * @param soldier - The soldier that the weapon belongs to
 	 * @param ammo - How much ammo does the weapon have
 	 * @param damage - How much damage does each Bullet from the weapon make
 	 * @param reloadTime - How long time before shots
 	 */
-	public AbstractWeapon(String name, Soldier soldier, int ammo, int damage, int reloadTime) {
+	public AbstractWeapon(String name, int ammo, int damage, int reloadTime) {
 		this.name = name;
-		this.soldier = soldier;
 		this.ammo = ammo;
 		this.damage = damage;
 		this.reloadTime = this.reloadCounter = this.defaultReloadTime = reloadTime;

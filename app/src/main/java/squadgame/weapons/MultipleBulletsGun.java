@@ -8,8 +8,8 @@ import squadgame.entities.Soldier;
 
 public class MultipleBulletsGun extends AbstractWeapon {
 
-	public MultipleBulletsGun(String name, Soldier soldier, int ammo, int damage, int reloadTime) {
-		super(name, soldier, ammo, damage, reloadTime);
+	public MultipleBulletsGun(String name, int ammo, int damage, int reloadTime) {
+		super(name, ammo, damage, reloadTime);
 	}
 
 	@Override

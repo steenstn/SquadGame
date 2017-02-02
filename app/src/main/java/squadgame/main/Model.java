@@ -16,6 +16,7 @@ import squadgame.interfaces.IRenderable;
 import squadgame.levels.Level;
 import squadgame.levels.LevelReader;
 import squadgame.pickups.soldier.AbstractSoldierPickup;
+import squadgame.weapons.LaserGun;
 import squadgame.weapons.MultipleBulletsGun;
 import squadgame.weapons.SingleBulletGun;
 import android.content.Context;
@@ -79,11 +80,11 @@ public class Model {
 
         soldiers = new ArrayList<Soldier>();
         Soldier soldier1 = soldierFactory.createSoldier("Bengelohanna", 200, screenHeight/2, 255, 0, 0, R.drawable.soldier_red);//new Soldier("Bengelohanna", 100,100,255,0,0);
-        soldier1.setWeapon(new MultipleBulletsGun("Shotgun", soldier1, 200, 10, 80));
+        soldier1.setWeapon(new LaserGun("Laser", 100, 10, 80));//.setWeapon(new MultipleBulletsGun("Shotgun", soldier1, 200, 10, 80));
 
         Soldier soldier2 = soldierFactory.createSoldier("Rubachandra", screenWidth-200, screenHeight / 2, 0, 0, 255,
             R.drawable.soldier_blue);
-        soldier2.setWeapon(new SingleBulletGun("Machine gun", soldier2, 200, 15, 25));
+        soldier2.setWeapon(new SingleBulletGun("Machine gun", 200, 15, 25));
 /*
         Soldier soldier3 = soldierFactory.createSoldier("Pepper Jack", screenWidth - 200, 100, 0, 255, 0,
             R.drawable.soldier_green);
